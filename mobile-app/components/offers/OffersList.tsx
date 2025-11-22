@@ -1,8 +1,8 @@
-import { FlatList } from 'react-native';
-import { router } from 'expo-router';
-import { useAuthContext } from '../../contexts/AuthContext';
-import OfferCard from './OfferCard';
-import { Offer } from '../../hooks/useOffers';
+import { FlatList } from "react-native";
+import { router } from "expo-router";
+import { useAuthContext } from "../../contexts/AuthContext";
+import OfferCard from "./OfferCard";
+import { Offer } from "../../hooks/useOffers";
 
 interface OffersListProps {
   offers: Offer[];
@@ -11,13 +11,13 @@ interface OffersListProps {
 export const OffersList = ({ offers }: OffersListProps) => {
   const { user } = useAuthContext();
 
-  const handleOfferPress = (offerId: string) => {
+  const handleOfferPress = (companyId: string) => {
     if (!user) {
-      router.push('/auth');
+      router.push("/auth");
       return;
     }
-    // Navigate to offer details if authenticated
-    router.push(`/`);
+    // Navigate to company offers page
+    router.push(`/company/${companyId}` as any);
   };
 
   return (
