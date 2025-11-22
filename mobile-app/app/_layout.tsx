@@ -12,6 +12,8 @@ function RootLayoutNav() {
 
     const inAuthGroup = segments[0] === "auth";
     const inAdminGroup = segments[0] === "admin";
+    const inProfilePage = segments[0] === "profile";
+    const inAdminProfilePage = segments[0] === "admin-profile";
 
     if (!user) {
       if (!inAuthGroup) {
@@ -19,7 +21,7 @@ function RootLayoutNav() {
       }
     } else if (user && userData) {
       if (userData.role === "admin") {
-        if (!inAdminGroup) {
+        if (!inAdminGroup && !inProfilePage && !inAdminProfilePage) {
           router.replace("/admin");
         }
       } else {
@@ -35,6 +37,9 @@ function RootLayoutNav() {
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
       <Stack.Screen name="auth" />
+      <Stack.Screen name="admin" />
+      <Stack.Screen name="profile" />
+      <Stack.Screen name="admin-profile" />
       <Stack.Screen name="company/[id]" />
     </Stack>
   );

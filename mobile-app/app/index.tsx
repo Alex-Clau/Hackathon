@@ -13,11 +13,14 @@ export default function Index() {
 
   if (offers.length === 0) {
     return (
-      <View className="flex-1 justify-center items-center px-6" style={{ backgroundColor: '#DAD7CD' }}>
-        <Text className="text-lg text-center mb-2" style={{ color: '#3A5A40' }}>
+      <View
+        className="flex-1 justify-center items-center px-6"
+        style={{ backgroundColor: "#DAD7CD" }}
+      >
+        <Text className="text-lg text-center mb-2" style={{ color: "#3A5A40" }}>
           No offers available
         </Text>
-        <Text className="text-sm text-center" style={{ color: '#588157' }}>
+        <Text className="text-sm text-center" style={{ color: "#588157" }}>
           Check if backend server is running on port 3000
         </Text>
       </View>
@@ -25,7 +28,7 @@ export default function Index() {
   }
 
   return (
-    <View className="flex-1" style={{ backgroundColor: '#DAD7CD' }}>
+    <View className="flex-1" style={{ backgroundColor: "#DAD7CD" }}>
       <HomeHeader offersCount={offers.length} />
       <OffersList offers={offers} />
     </View>
