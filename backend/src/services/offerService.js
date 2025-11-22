@@ -32,7 +32,7 @@ const getFullImageUrl = (logoPath) => {
   }
   // Convert relative path to full URL
   // For mobile devices, use the IP address instead of localhost
-  const host = process.env.API_HOST || '192.168.101.12'; // Use your computer's IP for mobile
+  const host = process.env.API_HOST || '192.168.34.48'; // Use your computer's IP for mobile
   const port = process.env.PORT || 3000;
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   return `${protocol}://${host}:${port}${logoPath.startsWith('/') ? logoPath : '/' + logoPath}`;

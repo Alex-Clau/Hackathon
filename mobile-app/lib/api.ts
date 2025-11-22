@@ -2,7 +2,7 @@
 // For physical devices, use your computer's IP address
 // For iOS Simulator/Android Emulator, localhost usually works
 // Override with EXPO_PUBLIC_API_URL environment variable if needed
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.101.12:3000/api';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.34.48:3000/api';
 
 export interface CompanyOffer {
   id: string;
@@ -32,28 +32,40 @@ class ApiClient {
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
+    
+    // Add timeout for requests
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    
     const config: RequestInit = {
       headers: {
         'Content-Type': 'application/json',
         ...options.headers,
       },
+      signal: controller.signal,
       ...options,
     };
 
     try {
       const response = await fetch(url, config);
-      const data = await response.json();
-
+      clearTimeout(timeoutId);
+      
       if (!response.ok) {
-        throw new Error(data.message || 'Request failed');
+        const data = await response.json().catch(() => ({}));
+        throw new Error(data.message || `Request failed with status ${response.status}`);
       }
 
+      const data = await response.json();
       return data.data || data;
     } catch (error) {
+      clearTimeout(timeoutId);
       if (error instanceof Error) {
+        if (error.name === 'AbortError') {
+          throw new Error('Request timeout - check if backend server is running');
+        }
         throw error;
       }
-      throw new Error('Network error');
+      throw new Error('Network error - unable to connect to server');
     }
   }
 
