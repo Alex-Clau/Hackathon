@@ -1,5 +1,5 @@
-import { View, Text, Image, Pressable } from 'react-native';
-import React from 'react';
+import { View, Text, Image, Pressable } from "react-native";
+import React from "react";
 
 interface OfferCardProps {
   image: string;
@@ -10,12 +10,12 @@ interface OfferCardProps {
 }
 
 const OfferCard: React.FC<OfferCardProps> = ({
-                                               image,
-                                               title,
-                                               companyName,
-                                               offersCount,
-                                               onPress,
-                                             }) => {
+  image,
+  title,
+  companyName,
+  offersCount,
+  onPress,
+}) => {
   return (
     <View className="bg-white rounded-xl shadow-md m-4 overflow-hidden">
       {/* Company Logo */}
@@ -26,7 +26,7 @@ const OfferCard: React.FC<OfferCardProps> = ({
             className="w-32 h-32 rounded-lg"
             resizeMode="contain"
             onError={(error) => {
-              console.error('Image load error:', error.nativeEvent.error);
+              console.error("Image load error:", error.nativeEvent.error);
             }}
           />
         ) : (
@@ -39,13 +39,11 @@ const OfferCard: React.FC<OfferCardProps> = ({
       {/* Content */}
       <View className="p-4">
         {/* Title */}
-        <Text className="text-xl font-bold text-gray-800 mb-2">
-          {title}
-        </Text>
+        <Text className="text-xl font-bold text-gray-800 mb-2">{title}</Text>
 
         {/* Offers Count */}
         <Text className="text-sm text-gray-600 mb-4">
-          {offersCount} {offersCount === 1 ? 'offer' : 'offers'} available
+          {offersCount} {offersCount === 1 ? "offer" : "offers"} available
         </Text>
 
         {/* Button */}
