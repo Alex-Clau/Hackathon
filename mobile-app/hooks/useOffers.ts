@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { apiClient } from '../lib/api';
 
 export interface Offer {
   id: string;
@@ -18,8 +19,7 @@ export const useOffers = () => {
 
   const fetchOffers = async () => {
     try {
-      const response = await fetch('YOUR_EXPRESS_API_URL/offers');
-      const data = await response.json();
+      const data = await apiClient.getOffersGroupedByCompany();
       setOffers(data);
     } catch (error) {
       console.error('Error fetching offers:', error);

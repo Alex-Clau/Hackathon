@@ -18,12 +18,23 @@ const OfferCard: React.FC<OfferCardProps> = ({
                                              }) => {
   return (
     <View className="bg-white rounded-xl shadow-md m-4 overflow-hidden">
-      {/* Image */}
-      <Image
-        source={{ uri: image }}
-        className="w-full h-48"
-        resizeMode="cover"
-      />
+      {/* Company Logo */}
+      <View className="bg-gray-50 p-6 items-center justify-center min-h-[180px]">
+        {image ? (
+          <Image
+            source={{ uri: image }}
+            className="w-32 h-32 rounded-lg"
+            resizeMode="contain"
+            onError={(error) => {
+              console.error('Image load error:', error.nativeEvent.error);
+            }}
+          />
+        ) : (
+          <View className="w-32 h-32 bg-gray-300 rounded-lg items-center justify-center">
+            <Text className="text-gray-500 text-lg">No Logo</Text>
+          </View>
+        )}
+      </View>
 
       {/* Content */}
       <View className="p-4">

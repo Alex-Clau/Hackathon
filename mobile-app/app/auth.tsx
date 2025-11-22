@@ -34,7 +34,8 @@ export default function AuthScreen() {
       className="flex-1 bg-white"
     >
       <ScrollView
-        className="flex-grow justify-center px-6 py-12"
+        className="flex-grow px-6 py-12"
+        contentContainerStyle={{ justifyContent: 'center', flexGrow: 1 }}
         keyboardShouldPersistTaps="handled"
       >
         <View className="w-full max-w-md mx-auto">

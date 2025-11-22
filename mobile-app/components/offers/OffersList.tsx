@@ -33,9 +33,9 @@ export const OffersList = ({ offers }: OffersListProps) => {
         />
       )}
       keyExtractor={(item) => item.id}
-      numColumns={2}
-      contentContainerStyle={{ padding: 8 }}
-      columnWrapperStyle={{ justifyContent: 'space-between' }}
+      numColumns={1}
+      contentContainerStyle={{ padding: 16 }}
+      showsVerticalScrollIndicator={false}
     />
   );
 };

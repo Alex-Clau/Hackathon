@@ -42,8 +42,8 @@ export const useAuth = () => {
       if (mode === 'signup') {
         await register(name, email, password);
         Alert.alert('Success', 'Account created successfully', [
-          { text: 'OK', onPress: () => router.replace('/') },
-        ]);
+        { text: 'OK', onPress: () => router.replace('/') },
+      ]);
       } else {
         await login(email, password);
         Alert.alert('Success', 'Logged in successfully', [
@@ -54,7 +54,7 @@ export const useAuth = () => {
       const errorMessage = error instanceof FirebaseError
         ? getFirebaseErrorMessage(error)
         : 'An error occurred';
-      Alert.alert('Error', errorMessage);
+        Alert.alert('Error', errorMessage);
     } finally {
       setLoading(false);
     }

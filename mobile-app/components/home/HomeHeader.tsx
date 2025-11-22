@@ -21,12 +21,12 @@ export const HomeHeader = ({ offersCount }: HomeHeaderProps) => {
         Browse {offersCount} available offers
       </Text>
       {user && (
-        <TouchableOpacity
-          className="absolute top-12 right-6 bg-red-600 rounded-lg px-4 py-2"
-          onPress={handleLogout}
-        >
-          <Text className="text-white font-semibold text-sm">Logout</Text>
-        </TouchableOpacity>
+      <TouchableOpacity
+        className="absolute top-12 right-6 bg-red-600 rounded-lg px-4 py-2"
+        onPress={handleLogout}
+      >
+        <Text className="text-white font-semibold text-sm">Logout</Text>
+      </TouchableOpacity>
       )}
     </View>
   );
