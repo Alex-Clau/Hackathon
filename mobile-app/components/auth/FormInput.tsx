@@ -13,16 +13,29 @@ export const FormInput = ({
   ...textInputProps
 }: FormInputProps) => {
   return (
-    <View className="mb-4">
-      <Text className="text-sm font-medium text-gray-700 mb-2">{label}</Text>
+    <View className="mb-5">
+      <Text 
+        className="text-sm font-semibold mb-2"
+        style={{ color: '#3A5A40' }}
+      >
+        {label}
+      </Text>
       <TextInput
-        className={`border rounded-lg px-4 py-3 text-base ${
-          error ? 'border-red-500 bg-red-50' : 'border-gray-300 bg-white'
-        }`}
+        className="border rounded-xl px-4 py-4 text-base"
+        style={{
+          borderColor: error ? '#DC2626' : '#A3B18A',
+          backgroundColor: error ? '#FEF2F2' : '#FFFFFF',
+          color: '#344E41',
+        }}
+        placeholderTextColor="#A3B18A"
         editable={!loading}
         {...textInputProps}
       />
-      {error && <Text className="text-red-500 text-sm mt-1">{error}</Text>}
+      {error && (
+        <Text className="text-sm mt-2" style={{ color: '#DC2626' }}>
+          {error}
+        </Text>
+      )}
     </View>
   );
 };

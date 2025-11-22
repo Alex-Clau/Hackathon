@@ -8,11 +8,17 @@ interface AuthHeaderProps {
 
 export const AuthHeader = ({ mode }: AuthHeaderProps) => {
   return (
-    <View>
-      <Text className="text-3xl font-bold text-center text-gray-900 mb-2">
+    <View className="mb-8">
+      <Text 
+        className="text-4xl font-bold text-center mb-3"
+        style={{ color: '#344E41' }}
+      >
         {mode === 'login' ? 'Welcome Back' : 'Create Account'}
       </Text>
-      <Text className="text-center text-gray-600 mb-8">
+      <Text 
+        className="text-center text-base"
+        style={{ color: '#588157' }}
+      >
         {mode === 'login' ? 'Sign in to continue' : 'Sign up to get started'}
       </Text>
     </View>

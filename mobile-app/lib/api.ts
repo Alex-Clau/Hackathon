@@ -1,7 +1,3 @@
-// API URL configuration
-// For physical devices, use your computer's IP address
-// For iOS Simulator/Android Emulator, localhost usually works
-// Override with EXPO_PUBLIC_API_URL environment variable if needed
 const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.34.48:3000/api';
 
 export interface CompanyOffer {
@@ -12,19 +8,8 @@ export interface CompanyOffer {
   offersCount: number;
 }
 
-export interface Offer {
-  id: string;
-  companyId: string;
-  companyName: string;
-  companyLogo: string;
-  productOfferName: string;
-  discountSize: string;
-  offerEndDate: Date;
-  createdAt: Date;
-}
-
 class ApiClient {
-  private baseUrl: string;
+  private readonly baseUrl: string;
 
   constructor(baseUrl: string) {
     this.baseUrl = baseUrl;
@@ -32,10 +17,8 @@ class ApiClient {
 
   private async request<T>(endpoint: string, options: RequestInit = {}): Promise<T> {
     const url = `${this.baseUrl}${endpoint}`;
-    
-    // Add timeout for requests
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 10000); // 10 second timeout
+    const timeoutId = setTimeout(() => controller.abort(), 10000);
     
     const config: RequestInit = {
       headers: {
@@ -73,20 +56,19 @@ class ApiClient {
     return this.request<CompanyOffer[]>('/offers?grouped=true');
   }
 
-  async getOffers(): Promise<Offer[]> {
-    return this.request<Offer[]>('/offers');
+  async getUserByUid(uid: string) {
+    return this.request(`/users/${uid}`);
   }
 
-  async getOfferById(offerId: string): Promise<Offer> {
-    return this.request<Offer>(`/offers/${offerId}`);
+  async createOrUpdateUser(uid: string, email: string) {
+    return this.request(`/users/${uid}`, {
+      method: 'POST',
+      body: JSON.stringify({ email }),
+    });
   }
 
-  async getCompanies() {
-    return this.request('/companies');
-  }
-
-  async getUserOffers(userId: string) {
-    return this.request(`/users/${userId}/offers`);
+  async getAdminStats(email: string) {
+    return this.request(`/admin/stats/${encodeURIComponent(email)}`);
   }
 }
 

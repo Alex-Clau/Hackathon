@@ -7,6 +7,8 @@ import initRoutes from './routes/initRoutes.js';
 import companiesRoutes from './routes/companiesRoutes.js';
 import offersRoutes from './routes/offersRoutes.js';
 import userOffersRoutes from './routes/userOffersRoutes.js';
+import userRoutes from './routes/userRoutes.js';
+import adminRoutes from './routes/adminRoutes.js';
 
 dotenv.config();
 
@@ -26,10 +28,7 @@ app.get('/health', (req, res) => {
   res.json({ status: 'ok', message: 'Server is running' });
 });
 
-// Serve static files from public directory (before API routes to avoid 404 handler)
-// __dirname is backend/src, so we go up one level to backend, then into public/images
 const staticPath = join(__dirname, '../public/images');
-console.log('Static files path:', staticPath);
 app.use('/images', express.static(staticPath, {
   setHeaders: (res, path) => {
     if (path.endsWith('.png') || path.endsWith('.jpg') || path.endsWith('.jpeg')) {
@@ -38,10 +37,11 @@ app.use('/images', express.static(staticPath, {
   }
 }));
 
-// API routes
 app.use('/api/companies', companiesRoutes);
 app.use('/api/offers', offersRoutes);
 app.use('/api/users', userOffersRoutes);
+app.use('/api/users', userRoutes);
+app.use('/api/admin', adminRoutes);
 
 // Initialization routes
 app.use('/api/init', initRoutes);
@@ -55,9 +55,7 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler (must be last)
 app.use((req, res) => {
-  // Don't return 404 for image requests that might be handled by static
   if (req.path.startsWith('/images/')) {
     return res.status(404).send('Image not found');
   }

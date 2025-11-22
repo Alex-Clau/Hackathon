@@ -1,6 +1,6 @@
 # Backend API
 
-REST API server for authentication with JWT tokens and Firestore.
+REST API server for managing companies, offers, and user-offer relationships with Firestore.
 
 ## Setup
 
@@ -9,97 +9,55 @@ REST API server for authentication with JWT tokens and Firestore.
 npm install
 ```
 
-2. Create a `.env` file based on `.env.example`:
-```bash
-cp .env
-```
-
-3. Configure your environment variables:
+2. Create a `.env` file with the following variables:
    - `PORT`: Server port (default: 3000)
-   - `JWT_SECRET`: Secret key for JWT tokens
-   - `JWT_EXPIRES_IN`: Token expiration time (default: 7d)
+   - `API_HOST`: Your computer's IP address for mobile device access (e.g., `192.168.34.48`)
    - Firebase Admin SDK credentials:
-     - `FIREBASE_PROJECT_ID`: Your Firebase project ID
-     - `FIREBASE_PRIVATE_KEY`: Your Firebase service account private key
-     - `FIREBASE_CLIENT_EMAIL`: Your Firebase service account email
+     - `EXPO_PUBLIC_FIREBASE_PROJECT_ID`: Your Firebase project ID
+     - `EXPO_PUBLIC_FIREBASE_PRIVATE_KEY`: Your Firebase service account private key (with `\n` for newlines)
+     - `EXPO_PUBLIC_FIREBASE_CLIENT_EMAIL`: Your Firebase service account email
 
-4. Get Firebase Admin SDK credentials:
+3. Get Firebase Admin SDK credentials:
    - Go to Firebase Console → Project Settings → Service Accounts
    - Generate a new private key
    - Copy the values to your `.env` file
+   - Alternatively, place `serviceAccountKey.json` in the backend folder
 
-5. Start the server:
+4. Start the server:
 ```bash
 npm start
 ```
 
-For development with auto-reload:
-```bash
-npm run dev
-```
-
 ## API Endpoints
 
-### POST /api/auth/signup
-Create a new user account.
+### Health Check
+- **GET** `/health` - Check if server is running
 
-**Request Body:**
-```json
-{
-  "name": "John Doe",
-  "email": "john@example.com",
-  "password": "SecurePass123"
-}
-```
+### Companies
+- **GET** `/api/companies` - Get all companies
+- **GET** `/api/companies/:id` - Get company by ID
 
-**Response:**
-```json
-{
-  "success": true,
-  "message": "User created successfully",
-  "data": {
-    "user": {
-      "id": "user-id",
-      "name": "John Doe",
-      "email": "john@example.com"
-    },
-    "token": "jwt-token"
-  }
-}
-```
+### Offers
+- **GET** `/api/offers` - Get all offers
+- **GET** `/api/offers?grouped=true` - Get offers grouped by company
+- **GET** `/api/offers/:id` - Get offer by ID
 
-### POST /api/auth/login
-Login with email and password.
+### User Offers
+- **GET** `/api/users/:userId/offers` - Get all offers for a specific user
 
-**Request Body:**
-```json
-{
-  "email": "john@example.com",
-  "password": "SecurePass123"
-}
-```
+### Initialization (Seeding)
+- **POST** `/api/init/all` - Initialize all data (companies, offers, users, user-offers)
+- **POST** `/api/init/companies` - Initialize companies only
+- **POST** `/api/init/offers` - Initialize offers only
+- **POST** `/api/init/users` - Initialize users only
+- **POST** `/api/init/users-offers` - Initialize user-offer relationships only
 
-**Response:**
-```json
-{
-  "success": true,
-  "message": "Login successful",
-  "data": {
-    "user": {
-      "id": "user-id",
-      "name": "John Doe",
-      "email": "john@example.com"
-    },
-    "token": "jwt-token"
-  }
-}
-```
+## Static Files
+
+Company logos are served from `/images/companies/` directory.
 
 ## Architecture
 
 - **Modular Structure**: Code is organized into separate modules (routes, services, utils)
-- **Validation**: Uses Zod for request validation
-- **Security**: Passwords are encrypted with bcrypt, JWT tokens for authentication
-- **Database**: Firestore for user storage
-- **Clean Code**: TypeScript-ready structure with proper error handling
-
+- **Database**: Firestore for data storage
+- **Clean Code**: Proper error handling and consistent response format

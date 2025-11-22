@@ -23,18 +23,19 @@ export const OffersList = ({ offers }: OffersListProps) => {
   return (
     <FlatList
       data={offers}
-      renderItem={({ item }) => (
+      renderItem={({ item, index }) => (
         <OfferCard
           image={item.imageUrl}
-          title={item.title}
           companyName={item.companyName}
           offersCount={item.offersCount}
           onPress={() => handleOfferPress(item.id)}
+          index={index}
+          key={item.id}
         />
       )}
       keyExtractor={(item) => item.id}
       numColumns={1}
-      contentContainerStyle={{ padding: 16 }}
+      contentContainerStyle={{ paddingVertical: 16 }}
       showsVerticalScrollIndicator={false}
     />
   );

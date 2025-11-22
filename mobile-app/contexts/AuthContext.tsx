@@ -8,9 +8,15 @@ import {
   updateProfile,
 } from 'firebase/auth';
 import { auth } from '../firebase/firebaseConfig';
+import { apiClient } from '../lib/api';
+
+interface UserData {
+  role: 'admin' | 'client';
+}
 
 interface AuthContextType {
   user: User | null;
+  userData: UserData | null;
   loading: boolean;
   register: (name: string, email: string, password: string) => Promise<void>;
   login: (email: string, password: string) => Promise<void>;
@@ -21,17 +27,48 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [user, setUser] = useState<User | null>(null);
+  const [userData, setUserData] = useState<UserData | null>(null);
   const [loading, setLoading] = useState(true);
 
+  const fetchUserData = async (uid: string, email?: string) => {
+    try {
+      const data = await apiClient.getUserByUid(uid);
+      setUserData(data);
+    } catch (error: any) {
+      if (error.message === 'User not found' && email) {
+        try {
+          await apiClient.createOrUpdateUser(uid, email);
+          const data = await apiClient.getUserByUid(uid);
+          setUserData(data);
+        } catch (createError) {
+          console.error('Error creating user data:', createError);
+          setUserData(null);
+        }
+      } else {
+        console.error('Error fetching user data:', error);
+        setUserData(null);
+      }
+    }
+  };
+
   useEffect(() => {
-    // Add timeout to prevent infinite loading
     const timeoutId = setTimeout(() => {
       setLoading(false);
-    }, 5000); // 5 second timeout
+    }, 5000);
 
-    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+    const unsubscribe = onAuthStateChanged(auth, async (currentUser) => {
       clearTimeout(timeoutId);
       setUser(currentUser);
+      
+      if (currentUser?.uid) {
+        await fetchUserData(
+          currentUser.uid,
+          currentUser.email || undefined
+        );
+      } else {
+        setUserData(null);
+      }
+      
       setLoading(false);
     });
 
@@ -48,6 +85,9 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       password
     );
     await updateProfile(userCredential.user, { displayName: name });
+    
+    await apiClient.createOrUpdateUser(userCredential.user.uid, email);
+    await fetchUserData(userCredential.user.uid, email);
   };
 
   const login = async (email: string, password: string) => {
@@ -59,7 +99,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, register, login, logout }}>
+    <AuthContext.Provider value={{ user, userData, loading, register, login, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   );

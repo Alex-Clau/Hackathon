@@ -1,5 +1,5 @@
 import { db } from '../config/firebase.js';
-import { companies, users, offers } from '../data/initData.js';
+import { companies, offers } from '../data/initData.js';
 
 export const getCompanyIdsByOrder = async () => {
   const snapshot = await db.collection('companies').get();
@@ -20,13 +20,7 @@ export const getUserIdsByOrder = async () => {
   if (snapshot.empty) {
     return [];
   }
-
-  const usersMap = new Map();
-  snapshot.docs.forEach((doc) => {
-    usersMap.set(doc.data().email, doc.id);
-  });
-
-  return users.map((user) => usersMap.get(user.email)).filter(Boolean);
+  return snapshot.docs.map((doc) => doc.id);
 };
 
 export const getOfferIdsByOrder = async () => {
