@@ -6,16 +6,8 @@ import {
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import QRCode from "react-native-qrcode-svg";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { QRInfoModal } from "./QRInfoModal";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withRepeat,
-  withTiming,
-  withSequence,
-  Easing,
-} from "react-native-reanimated";
 
 interface QRCodeDisplayProps {
   userId?: string;
@@ -23,41 +15,6 @@ interface QRCodeDisplayProps {
 
 export const QRCodeDisplay = ({ userId }: QRCodeDisplayProps) => {
   const [showInfo, setShowInfo] = useState(false);
-  const pulseScale = useSharedValue(1);
-  const cardOpacity = useSharedValue(0);
-  const cardTranslateY = useSharedValue(20);
-
-  useEffect(() => {
-    // Card entrance animation
-    cardOpacity.value = withTiming(1, { duration: 600 });
-    cardTranslateY.value = withTiming(0, {
-      duration: 600,
-      easing: Easing.out(Easing.ease),
-    });
-
-    // Subtle pulse animation for QR code
-    pulseScale.value = withRepeat(
-      withSequence(
-        withTiming(1.02, { duration: 2000, easing: Easing.inOut(Easing.ease) }),
-        withTiming(1, { duration: 2000, easing: Easing.inOut(Easing.ease) })
-      ),
-      -1,
-      false
-    );
-  }, []);
-
-  const pulseStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ scale: pulseScale.value }],
-    };
-  });
-
-  const cardStyle = useAnimatedStyle(() => {
-    return {
-      opacity: cardOpacity.value,
-      transform: [{ translateY: cardTranslateY.value }],
-    };
-  });
 
   const infoItems = [
     {
@@ -78,7 +35,7 @@ export const QRCodeDisplay = ({ userId }: QRCodeDisplayProps) => {
   ];
 
   return (
-    <Animated.View className="m-4" style={cardStyle}>
+    <View className="m-4">
       <View className="bg-white p-6 rounded-xl shadow-sm">
         <View className="flex-row items-center justify-between mb-4">
         <View className="flex-row items-center">
@@ -98,9 +55,9 @@ export const QRCodeDisplay = ({ userId }: QRCodeDisplayProps) => {
       <Text className="text-gray-600 mb-6 text-center">
         Show this QR code to redeem your offers
       </Text>
-      <Animated.View
+      <View
         className="items-center justify-center bg-white p-6 rounded-xl"
-        style={[styles.qrContainer, pulseStyle]}
+        style={styles.qrContainer}
       >
         {userId ? (
           <QRCode
@@ -118,7 +75,7 @@ export const QRCodeDisplay = ({ userId }: QRCodeDisplayProps) => {
             <Text className="text-gray-500 mt-2">No QR code available</Text>
           </View>
         )}
-      </Animated.View>
+      </View>
       <Text className="text-gray-500 text-xs text-center mt-4">
         User ID: {userId?.substring(0, 8)}...
       </Text>
@@ -130,7 +87,7 @@ export const QRCodeDisplay = ({ userId }: QRCodeDisplayProps) => {
         title="How to Use Your QR Code"
         items={infoItems}
       />
-    </Animated.View>
+    </View>
   );
 };
 

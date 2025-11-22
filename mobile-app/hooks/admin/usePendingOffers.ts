@@ -8,12 +8,12 @@ export interface UserOffer {
   offerId: string;
   companyId?: string;
   status: "pending" | "active" | "redeemed";
-    offer?: {
-      id: string;
-      productOfferName: string;
-      discountSize: string;
-      description?: string;
-    };
+  offer?: {
+    id: string;
+    productOfferName: string;
+    discountSize: string;
+    description?: string;
+  };
 }
 
 export const usePendingOffers = (adminEmail: string | null) => {
@@ -49,15 +49,12 @@ export const usePendingOffers = (adminEmail: string | null) => {
     try {
       setLoading(true);
       
-      // Get admin's company ID
+      // Get admin's company ID (optional - we'll show all offers regardless)
       let adminCompanyId: string | null = null;
       if (adminEmail) {
         adminCompanyId = await getAdminCompanyId(adminEmail);
         if (!adminCompanyId) {
-          console.warn("Admin company ID not found");
-          setPendingOffers([]);
-          setActiveOffers([]);
-          return;
+          console.warn("Admin company ID not found - will show all offers but disable actions");
         }
       }
 
@@ -78,13 +75,18 @@ export const usePendingOffers = (adminEmail: string | null) => {
             
             const offerData = offerDoc.data();
             
-            // Filter by company ID if admin - check both userOffer.companyId and offer.companyId
+            // Filter by company ID if admin - only show offers from admin's company
             if (adminCompanyId) {
-              const userOfferCompanyId = data.companyId;
-              const offerCompanyId = offerData.companyId;
+              const userOfferCompanyId = data.companyId ? String(data.companyId) : null;
+              const offerCompanyId = offerData.companyId ? String(offerData.companyId) : null;
+              const adminCompanyIdStr = String(adminCompanyId);
               
-              // If neither matches, filter out
-              if (userOfferCompanyId !== adminCompanyId && offerCompanyId !== adminCompanyId) {
+              // Include if either the userOffer.companyId or offer.companyId matches the admin's company
+              const matchesCompany = 
+                (userOfferCompanyId && userOfferCompanyId === adminCompanyIdStr) || 
+                (offerCompanyId && offerCompanyId === adminCompanyIdStr);
+              
+              if (!matchesCompany) {
                 return null;
               }
             }
@@ -109,8 +111,10 @@ export const usePendingOffers = (adminEmail: string | null) => {
         })
       );
       const validOffers = offers.filter((o) => o !== null && o.offer) as UserOffer[];
-      setPendingOffers(validOffers.filter((o) => o.status === "pending"));
-      setActiveOffers(validOffers.filter((o) => o.status === "active"));
+      const pending = validOffers.filter((o) => o.status === "pending");
+      const active = validOffers.filter((o) => o.status === "active");
+      setPendingOffers(pending);
+      setActiveOffers(active);
     } catch (error) {
       console.error("Error fetching user offers:", error);
     } finally {
@@ -120,16 +124,41 @@ export const usePendingOffers = (adminEmail: string | null) => {
 
   const activateOffer = async (userOfferId: string): Promise<boolean> => {
     try {
+      // Get the user offer to check the offer details
+      const userOfferDoc = await getDoc(doc(db, "usersOffers", userOfferId));
+      if (!userOfferDoc.exists()) {
+        console.error("User offer not found:", userOfferId);
+        return false;
+      }
+
+      const userOfferData = userOfferDoc.data();
+      const offerId = userOfferData.offerId;
+
+      // Check if the offer is expired
+      const offerDoc = await getDoc(doc(db, "offers", offerId));
+      if (!offerDoc.exists()) {
+        console.error("Offer not found:", offerId);
+        return false;
+      }
+
+      const offerData = offerDoc.data();
+      const offerEndDate = offerData.offerEndDate?.toDate 
+        ? offerData.offerEndDate.toDate() 
+        : new Date(offerData.offerEndDate);
+      
+      if (offerEndDate <= new Date()) {
+        console.error("Cannot activate expired offer:", offerId);
+        return false;
+      }
+
       await updateDoc(doc(db, "usersOffers", userOfferId), {
         status: "active",
       });
+      
       // Refresh offers after activation
-      const userOfferDoc = await getDoc(doc(db, "usersOffers", userOfferId));
-      if (userOfferDoc.exists()) {
-        const userId = userOfferDoc.data().userId;
-        if (userId) {
-          await fetchUserOffers(userId, adminEmail);
-        }
+      const userId = userOfferData.userId;
+      if (userId) {
+        await fetchUserOffers(userId, adminEmail);
       }
       return true;
     } catch (error) {

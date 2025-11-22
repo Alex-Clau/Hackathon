@@ -31,15 +31,53 @@ const AnimatedButton = ({ onPress, className, text }: AnimatedButtonProps) => {
     scale.value = withSpring(1);
   };
 
+  // Extract background color from className with vibrant, colorful options
+  const getBackgroundColor = () => {
+    if (!className) return '#10B981'; // default vibrant green
+    if (className.includes('Activate')) return '#10B981'; // Vibrant emerald green for activate
+    if (className.includes('Redeem')) return '#059669'; // Deep emerald green for redeem
+    if (className.includes('bg-[#588157]')) return '#10B981';
+    if (className.includes('bg-[#10B981]')) return '#059669';
+    if (className.includes('bg-[#1A4D2E]')) return '#1A4D2E';
+    return '#10B981'; // default vibrant green
+  };
+  
+  // Get text color (white for all buttons)
+  const getTextColor = () => {
+    return '#FFFFFF';
+  };
+
   return (
     <AnimatedPressable
       onPress={onPress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
       className={className}
-      style={animatedStyle}
+      style={[
+        animatedStyle,
+        {
+          backgroundColor: getBackgroundColor(),
+          paddingVertical: 12,
+          paddingHorizontal: 24,
+          borderRadius: 12,
+          minHeight: 48,
+          shadowColor: getBackgroundColor(),
+          shadowOffset: { width: 0, height: 4 },
+          shadowOpacity: 0.4,
+          shadowRadius: 6,
+          elevation: 5,
+        },
+      ]}
     >
-      <Text className="text-white text-center font-semibold text-sm">
+      <Text 
+        style={{ 
+          color: getTextColor(),
+          fontSize: 15,
+          fontWeight: '700',
+          textAlign: 'center',
+          letterSpacing: 0.5,
+        }}
+      >
         {text}
       </Text>
     </AnimatedPressable>
@@ -103,7 +141,7 @@ export const PendingOffersList = ({
                 )}
                 <AnimatedButton
                   onPress={() => onActivate(userOffer.id)}
-                  className="bg-[#1A4D2E] py-2 px-4 rounded-lg mt-2 mb-2"
+                  className="Activate py-2 px-4 rounded-lg mt-2 mb-2"
                   text="Activate Offer"
                 />
               </View>
@@ -142,7 +180,7 @@ export const PendingOffersList = ({
                 )}
                 <AnimatedButton
                   onPress={() => onRedeem(userOffer.id)}
-                  className="bg-[#10B981] py-2 px-4 rounded-lg mt-2 mb-2"
+                  className="Redeem py-2 px-4 rounded-lg mt-2 mb-2"
                   text="Redeem Offer"
                 />
               </View>

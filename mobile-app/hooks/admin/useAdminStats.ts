@@ -32,6 +32,7 @@ export const useAdminStats = () => {
       setStats(data as AdminStats);
     } catch (error) {
       console.error("Error fetching admin stats:", error);
+      setStats(null);
     } finally {
       setLoading(false);
       setRefreshing(false);

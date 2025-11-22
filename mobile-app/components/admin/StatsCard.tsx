@@ -1,10 +1,12 @@
 import { View, Text } from "react-native";
-import { useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  withSpring,
   Easing,
+  runOnJS,
 } from "react-native-reanimated";
 
 interface StatsCardProps {
@@ -24,15 +26,14 @@ export const StatsCard = ({
   labelColor,
   isLarge = false,
 }: StatsCardProps) => {
-  const animatedValue = useSharedValue(0);
+  const [displayValue, setDisplayValue] = useState(0);
   const scale = useSharedValue(0.9);
   const opacity = useSharedValue(0);
 
   useEffect(() => {
-    animatedValue.value = withTiming(value, {
-      duration: 1500,
-      easing: Easing.out(Easing.ease),
-    });
+    // Update display value immediately
+    setDisplayValue(value);
+    
     scale.value = withSpring(1, { damping: 15, stiffness: 100 });
     opacity.value = withTiming(1, { duration: 500 });
   }, [value]);
@@ -43,8 +44,6 @@ export const StatsCard = ({
       transform: [{ scale: scale.value }],
     };
   });
-
-  const displayValue = Math.round(animatedValue.value);
 
   return (
     <Animated.View
@@ -61,14 +60,14 @@ export const StatsCard = ({
         animatedTextStyle,
       ]}
     >
-      <Animated.Text
+      <Text
         className={`${isLarge ? "text-3xl" : "text-2xl"} font-bold ${
           isLarge ? "mb-2" : "mb-1"
         }`}
         style={{ color: textColor }}
       >
         {displayValue}
-      </Animated.Text>
+      </Text>
       <Text style={{ color: labelColor, fontSize: isLarge ? 16 : 14 }}>
         {label}
       </Text>

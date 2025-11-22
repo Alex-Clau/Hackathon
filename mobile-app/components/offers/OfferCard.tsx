@@ -81,6 +81,11 @@ export const OfferCard = ({
   const handleActivate = async () => {
     if (!offerId || !onActivate) return;
 
+    if (!isActive) {
+      Alert.alert("Expired Offer", "This offer has expired and cannot be activated.");
+      return;
+    }
+
     if (isActivated) {
       Alert.alert("Info", "This offer is already activated");
       return;
@@ -93,7 +98,7 @@ export const OfferCard = ({
     if (success) {
       Alert.alert("Success", "Offer activated! Show your QR code to redeem.");
     } else {
-      Alert.alert("Error", "Failed to activate offer. Please try again.");
+      Alert.alert("Error", "Failed to activate offer. The offer may have expired or there was an error.");
     }
   };
 
@@ -159,16 +164,16 @@ export const OfferCard = ({
       {showActivateButton && (
         <Pressable
           onPress={handleActivate}
-          disabled={loading || isActivated}
+          disabled={loading || isActivated || !isActive}
           className={`px-4 py-2 rounded-xl ${
-            isActivated ? "bg-gray-400" : "bg-[#1A4D2E]"
+            !isActive ? "bg-gray-400" : isActivated ? "bg-gray-400" : "bg-[#1A4D2E]"
           }`}
         >
           {loading ? (
             <ActivityIndicator color="white" size="small" />
           ) : (
             <Text className="text-white font-semibold text-sm text-center">
-              {isActivated ? "Activated" : "Activate"}
+              {!isActive ? "Expired" : isActivated ? "Activated" : "Activate"}
             </Text>
           )}
         </Pressable>

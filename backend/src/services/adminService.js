@@ -6,22 +6,46 @@ export const getAdminStats = async (companyId) => {
   
   const now = new Date();
   const activeOffers = offers.filter((offer) => {
+    if (!offer.offerEndDate) return false;
     const endDate = offer.offerEndDate?.toDate ? offer.offerEndDate.toDate() : new Date(offer.offerEndDate);
     return endDate > now;
   });
   const expiredOffers = offers.filter((offer) => {
+    if (!offer.offerEndDate) return true;
     const endDate = offer.offerEndDate?.toDate ? offer.offerEndDate.toDate() : new Date(offer.offerEndDate);
     return endDate <= now;
   });
 
-  const usersOffersSnapshot = await db
-    .collection('usersOffers')
-    .get();
-
+  // Get all user offers for this company's offers
   const companyOfferIds = new Set(offers.map((o) => o.id));
-  const totalEngagements = usersOffersSnapshot.docs.filter((doc) =>
-    companyOfferIds.has(doc.data().offerId)
-  ).length;
+  
+  // Query usersOffers that match company's offer IDs
+  // Note: Firestore 'in' query has a limit of 10 items
+  const companyOfferIdsArray = Array.from(companyOfferIds);
+  let usersOffersSnapshot;
+  
+  if (companyOfferIdsArray.length <= 10 && companyOfferIdsArray.length > 0) {
+    // Use 'in' query for efficiency when we have 10 or fewer offers
+    usersOffersSnapshot = await db
+      .collection('usersOffers')
+      .where('offerId', 'in', companyOfferIdsArray)
+      .get();
+  } else {
+    // Get all user offers and filter in memory (for companies with >10 offers)
+    usersOffersSnapshot = await db
+      .collection('usersOffers')
+      .get();
+  }
+
+  // Count only active and redeemed offers (not pending) as engagements
+  const totalEngagements = usersOffersSnapshot.docs.filter((doc) => {
+    const data = doc.data();
+    const offerId = data.offerId;
+    const status = data.status || 'pending';
+    
+    // Check if this offer belongs to the company AND is active/redeemed
+    return companyOfferIds.has(offerId) && (status === 'active' || status === 'redeemed');
+  }).length;
 
   return {
     totalOffers: offers.length,

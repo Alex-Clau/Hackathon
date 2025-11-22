@@ -46,12 +46,14 @@ export default function AdminProfileScreen() {
     const success = await activateOffer(userOfferId);
     if (success) {
       Alert.alert("Success", "Offer activated! User can now redeem it.");
+      refreshStats(); // Refresh dashboard stats to update engagements count
       if (scannedUserId) {
         fetchPendingOffers(scannedUserId, user?.email || null);
       }
     } else {
-      Alert.alert("Error", "Failed to activate offer");
+      Alert.alert("Error", "Failed to activate offer. The offer may have expired or there was an error.");
     }
+    return success;
   };
 
   const handleRedeemOffer = async (userOfferId: string) => {
