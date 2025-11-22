@@ -29,9 +29,15 @@ export const QualityCheckResult = ({
   result,
   onClose,
 }: QualityCheckResultProps) => {
-  if (!result) return null;
-
   const getConfig = () => {
+    if (!result) {
+      return {
+        icon: "help-circle",
+        color: "#6B7280",
+        bgColor: "#F3F4F6",
+        title: "Unknown",
+      };
+    }
     switch (result.tier) {
       case "DONATE":
         return {
@@ -70,7 +76,7 @@ export const QualityCheckResult = ({
   const iconScale = useSharedValue(0);
 
   useEffect(() => {
-    if (visible) {
+    if (visible && result) {
       scale.value = withSpring(1, { damping: 12, stiffness: 300 });
       opacity.value = withTiming(1, { duration: 150 });
       iconScale.value = withSequence(
@@ -80,9 +86,9 @@ export const QualityCheckResult = ({
     } else {
       scale.value = withTiming(0.8, { duration: 100 });
       opacity.value = withTiming(0, { duration: 100 });
-      iconScale.value = 0;
+      iconScale.value = withTiming(0, { duration: 100 });
     }
-  }, [visible]);
+  }, [visible, result]);
 
   const animatedStyle = useAnimatedStyle(() => {
     return {
@@ -102,6 +108,10 @@ export const QualityCheckResult = ({
       transform: [{ scale: iconScale.value }],
     };
   });
+
+  if (!result || !visible) {
+    return null;
+  }
 
   return (
     <Modal visible={visible} transparent animationType="none">

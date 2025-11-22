@@ -31,7 +31,6 @@ async function findAvailableModel() {
         if (visionModels.length > 0) {
           const preferred = visionModels.find(m => m.includes('flash')) || visionModels[0];
           cachedModelName = preferred;
-          console.log(`✅ Found available model: '${cachedModelName}'`);
           return cachedModelName;
         }
       }
@@ -53,14 +52,12 @@ async function findAvailableModel() {
       const testResult = await model.generateContent("test");
       if (testResult && testResult.response) {
         cachedModelName = modelName;
-        console.log(`✅ Using model: '${modelName}'`);
         return modelName;
       }
     } catch (e) {
       const errorMsg = e.message || e.toString() || '';
       if (!errorMsg.includes("404") && !errorMsg.includes("not found")) {
         cachedModelName = modelName;
-        console.log(`✅ Using model: '${modelName}' (error suggests it exists)`);
         return modelName;
       }
     }
@@ -128,7 +125,6 @@ export const estimateBulkQuality = async (base64Image) => {
 
       if (!cachedModelName) {
         cachedModelName = modelName;
-        console.log(`✅ Successfully using model: '${modelName}'`);
       }
 
       const responseText = result.response.text();

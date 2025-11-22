@@ -30,6 +30,7 @@ export const offers = [
     productOfferName: 'Air Max Running Shoes Collection',
     discountSize: '30%',
     description: 'Bring 4kgs of Nike clothing items to activate this offer',
+    requiredKg: 4,
     offerEndDate: new Date('2027-12-31'), // Far future
   },
   {
@@ -37,6 +38,7 @@ export const offers = [
     productOfferName: 'Dri-FIT Sportswear Bundle',
     discountSize: '$50 off',
     description: 'Collect 3kgs of Nike sportswear to unlock this discount',
+    requiredKg: 3,
     offerEndDate: new Date('2027-11-30'), // Far future
   },
   {
@@ -44,6 +46,7 @@ export const offers = [
     productOfferName: 'Jordan Retro Sneakers',
     discountSize: '25%',
     description: 'Donate 5kgs of Nike apparel to redeem this exclusive offer',
+    requiredKg: 5,
     offerEndDate: new Date('2027-10-15'), // Far future
   },
   // Adidas (3 offers)
@@ -52,6 +55,7 @@ export const offers = [
     productOfferName: 'Ultraboost Running Shoes',
     discountSize: '25%',
     description: 'Bring 4.5kgs of Adidas clothing to activate this offer',
+    requiredKg: 4.5,
     offerEndDate: new Date('2027-12-15'), // Far future
   },
   {
@@ -59,6 +63,7 @@ export const offers = [
     productOfferName: 'Originals Streetwear Collection',
     discountSize: '$40 off',
     description: 'Collect 3.5kgs of Adidas items to unlock this discount',
+    requiredKg: 3.5,
     offerEndDate: new Date('2027-11-05'), // Far future
   },
   {
@@ -66,6 +71,7 @@ export const offers = [
     productOfferName: 'Yeezy Collection - Select Items',
     discountSize: '20%',
     description: 'Donate 6kgs of Adidas apparel to redeem this special offer',
+    requiredKg: 6,
     offerEndDate: new Date('2027-09-20'), // Far future
   },
   // Zara (3 offers)
@@ -74,6 +80,7 @@ export const offers = [
     productOfferName: 'Winter Coat Collection',
     discountSize: '40%',
     description: 'Bring 5kgs of Zara clothing to activate this winter offer',
+    requiredKg: 5,
     offerEndDate: new Date('2027-12-20'), // Far future
   },
   {
@@ -81,6 +88,7 @@ export const offers = [
     productOfferName: 'Business Casual Attire',
     discountSize: '$60 off',
     description: 'Collect 3kgs of Zara professional wear to unlock this discount',
+    requiredKg: 3,
     offerEndDate: new Date('2027-11-18'), // Far future
   },
   {
@@ -88,6 +96,7 @@ export const offers = [
     productOfferName: 'Summer Dresses & Tops',
     discountSize: '35%',
     description: 'Donate 4kgs of Zara summer clothing to redeem this offer',
+    requiredKg: 4,
     offerEndDate: new Date('2027-10-01'), // Far future
   },
   // H&M (3 offers)
@@ -96,6 +105,7 @@ export const offers = [
     productOfferName: 'Denim Jeans Collection',
     discountSize: '30%',
     description: 'Bring 4kgs of H&M clothing to activate this denim offer',
+    requiredKg: 4,
     offerEndDate: new Date('2027-11-25'), // Far future
   },
   {
@@ -103,6 +113,7 @@ export const offers = [
     productOfferName: 'Basic Essentials Bundle',
     discountSize: '$25 off',
     description: 'Collect 2.5kgs of H&M basics to unlock this discount',
+    requiredKg: 2.5,
     offerEndDate: new Date('2027-12-28'), // Far future
   },
   {
@@ -110,6 +121,7 @@ export const offers = [
     productOfferName: 'Kids Clothing Collection',
     discountSize: '40%',
     description: 'Donate 5kgs of H&M kids clothing to redeem this family offer',
+    requiredKg: 5,
     offerEndDate: new Date('2027-08-31'), // Far future
   },
   // Puma (3 offers)
@@ -118,6 +130,7 @@ export const offers = [
     productOfferName: 'RS-X Sneakers Collection',
     discountSize: '30%',
     description: 'Bring 4kgs of Puma clothing to activate this sneaker offer',
+    requiredKg: 4,
     offerEndDate: new Date('2027-12-10'), // Far future
   },
   {
@@ -125,6 +138,7 @@ export const offers = [
     productOfferName: 'Training Apparel Bundle',
     discountSize: '$35 off',
     description: 'Collect 3.5kgs of Puma sportswear to unlock this training discount',
+    requiredKg: 3.5,
     offerEndDate: new Date('2027-12-31'), // Far future
   },
   {
@@ -132,6 +146,7 @@ export const offers = [
     productOfferName: 'Classic Suede Sneakers',
     discountSize: '25%',
     description: 'Donate 5kgs of Puma apparel to redeem this classic offer',
+    requiredKg: 5,
     offerEndDate: new Date('2027-09-15'), // Far future
   },
 ];

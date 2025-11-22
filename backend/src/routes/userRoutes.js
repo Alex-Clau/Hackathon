@@ -35,6 +35,8 @@ router.post('/:uid', async (req, res) => {
 
     const userData = {
       role,
+      totalKgDonated: 0, // Initialize donation tracking for environmental impact
+      donations: [], // Initialize donations array
     };
 
     const user = await createOrUpdateUser(req.params.uid, userData);

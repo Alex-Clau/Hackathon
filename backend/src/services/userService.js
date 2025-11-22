@@ -13,13 +13,15 @@ export const createOrUpdateUser = async (uid, userData) => {
   const doc = await userRef.get();
 
   if (doc.exists) {
-    await userRef.update({
-      ...userData,
-      updatedAt: new Date(),
-    });
+    // Only update fields that are provided, don't overwrite existing totalKgDonated if not provided
+    const updateData = { ...userData, updatedAt: new Date() };
+    await userRef.update(updateData);
   } else {
+    // Initialize new user with default values for donation tracking
     await userRef.set({
       ...userData,
+      totalKgDonated: userData.totalKgDonated !== undefined ? userData.totalKgDonated : 0,
+      donations: userData.donations || [],
       createdAt: new Date(),
       updatedAt: new Date(),
     });

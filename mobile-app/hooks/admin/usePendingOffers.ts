@@ -151,12 +151,34 @@ export const usePendingOffers = (adminEmail: string | null) => {
         return false;
       }
 
+      const requiredKg = offerData.requiredKg || 1; // Default to 1kg if not specified
+      const userId = userOfferData.userId;
+
+      // Update offer status to active
       await updateDoc(doc(db, "usersOffers", userOfferId), {
         status: "active",
       });
+
+      // Update user's totalKgDonated
+      const userRef = doc(db, "users", userId);
+      const userDoc = await getDoc(userRef);
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+        const currentKg = userData.totalKgDonated || 0;
+        const newKg = currentKg + requiredKg;
+        
+        // Check if user is not an admin before updating
+        if (userData.role !== "admin") {
+          await updateDoc(userRef, {
+            totalKgDonated: newKg,
+          });
+        }
+      } else {
+        console.error("User document does not exist:", userId);
+        return false;
+      }
       
       // Refresh offers after activation
-      const userId = userOfferData.userId;
       if (userId) {
         await fetchUserOffers(userId, adminEmail);
       }

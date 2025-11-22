@@ -26,6 +26,7 @@ export const initOffers = async (companyIds) => {
       productOfferName: offer.productOfferName,
       discountSize: offer.discountSize,
       description: offer.description || '',
+      requiredKg: offer.requiredKg || 1,
       offerEndDate: offer.offerEndDate,
       createdAt: new Date(),
     });
