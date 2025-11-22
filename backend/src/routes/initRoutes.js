@@ -6,6 +6,7 @@ import {
   initUsersOffers,
   initAll,
 } from '../services/initService.js';
+import { initAdminMetadata } from '../services/adminMetadataService.js';
 import {
   getCompanyIdsByOrder,
   getUserIdsByOrder,
@@ -41,9 +42,22 @@ router.post('/offers', async (req, res) => {
 router.post('/users', async (req, res) => {
   try {
     const result = await initUsers();
-    return successResponse(res, `Initialized ${result.count} users`, result);
+    return successResponse(res, result.message || 'Users initialization info', result);
   } catch (error) {
     return handleAsyncError(res, error, 'Error initializing users');
+  }
+});
+
+router.post('/admin-metadata', async (req, res) => {
+  try {
+    const companyIds = await getCompanyIdsByOrder();
+    if (companyIds.length === 0) {
+      return errorResponse(res, 400, 'Companies must be initialized first');
+    }
+    const result = await initAdminMetadata(companyIds);
+    return successResponse(res, `Initialized ${result.count} admin metadata entries`, result);
+  } catch (error) {
+    return handleAsyncError(res, error, 'Error initializing admin metadata');
   }
 });
 

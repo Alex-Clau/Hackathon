@@ -1,5 +1,6 @@
 import { db } from '../config/firebase.js';
-import { companies, offers, users, usersOffers } from '../data/initData.js';
+import { companies, offers, usersOffers } from '../data/initData.js';
+import { initAdminMetadata } from './adminMetadataService.js';
 
 export const initCompanies = async () => {
   const companyIds = [];
@@ -33,15 +34,7 @@ export const initOffers = async (companyIds) => {
 };
 
 export const initUsers = async () => {
-  const userIds = [];
-  for (const user of users) {
-    const docRef = await db.collection('users').add({
-      name: user.name,
-      email: user.email,
-    });
-    userIds.push(docRef.id);
-  }
-  return { userIds, count: userIds.length };
+  return { message: 'Users are now created via Firebase Auth. Use /api/init/admin-metadata to initialize admin metadata.' };
 };
 
 export const initUsersOffers = async (userIds, offerIds) => {
@@ -74,14 +67,12 @@ export const initAll = async () => {
   const offersResult = await initOffers(companiesResult.companyIds);
   results.offers = offersResult;
 
-  const usersResult = await initUsers();
-  results.users = usersResult;
+  const adminMetadataResult = await initAdminMetadata(companiesResult.companyIds);
+  results.adminMetadata = adminMetadataResult;
 
-  const usersOffersResult = await initUsersOffers(
-    usersResult.userIds,
-    offersResult.offerIds
-  );
-  results.usersOffers = usersOffersResult;
+  results.users = { message: 'Users are created via Firebase Auth on signup' };
+
+  results.usersOffers = { message: 'User-offer relationships require existing users' };
 
   return results;
 };

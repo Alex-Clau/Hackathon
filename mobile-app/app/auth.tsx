@@ -31,7 +31,8 @@ export default function AuthScreen() {
   return (
     <KeyboardAvoidingView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1 bg-white"
+      className="flex-1"
+      style={{ backgroundColor: '#DAD7CD' }}
     >
       <ScrollView
         className="flex-grow px-6 py-12"

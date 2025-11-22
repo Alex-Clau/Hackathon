@@ -1,6 +1,17 @@
 import { db } from '../config/firebase.js';
 import { getCompanyById } from './companyService.js';
 
+const getFullImageUrl = (logoPath) => {
+  if (!logoPath) return '';
+  if (logoPath.startsWith('http://') || logoPath.startsWith('https://')) {
+    return logoPath;
+  }
+  const host = process.env.API_HOST || '192.168.34.48';
+  const port = process.env.PORT || 3000;
+  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
+  return `${protocol}://${host}:${port}${logoPath.startsWith('/') ? logoPath : '/' + logoPath}`;
+};
+
 export const getAllOffers = async () => {
   const snapshot = await db.collection('offers').get();
   const offers = [];
@@ -13,7 +24,7 @@ export const getAllOffers = async () => {
       id: doc.id,
       companyId: offerData.companyId,
       companyName: company?.name || 'Unknown',
-      companyLogo: company?.logo || '',
+      companyLogo: getFullImageUrl(company?.logo),
       productOfferName: offerData.productOfferName,
       discountSize: offerData.discountSize,
       offerEndDate: offerData.offerEndDate,
@@ -22,20 +33,6 @@ export const getAllOffers = async () => {
   }
 
   return offers;
-};
-
-const getFullImageUrl = (logoPath) => {
-  if (!logoPath) return '';
-  // If already a full URL, return as is
-  if (logoPath.startsWith('http://') || logoPath.startsWith('https://')) {
-    return logoPath;
-  }
-  // Convert relative path to full URL
-  // For mobile devices, use the IP address instead of localhost
-  const host = process.env.API_HOST || '192.168.34.48'; // Use your computer's IP for mobile
-  const port = process.env.PORT || 3000;
-  const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
-  return `${protocol}://${host}:${port}${logoPath.startsWith('/') ? logoPath : '/' + logoPath}`;
 };
 
 export const getOffersGroupedByCompany = async () => {
@@ -75,7 +72,7 @@ export const getOfferById = async (offerId) => {
     id: doc.id,
     companyId: offerData.companyId,
     companyName: company?.name || 'Unknown',
-    companyLogo: company?.logo || '',
+    companyLogo: getFullImageUrl(company?.logo),
     productOfferName: offerData.productOfferName,
     discountSize: offerData.discountSize,
     offerEndDate: offerData.offerEndDate,
@@ -98,7 +95,7 @@ export const getOffersByCompanyId = async (companyId) => {
       id: doc.id,
       companyId: offerData.companyId,
       companyName: company?.name || 'Unknown',
-      companyLogo: company?.logo || '',
+      companyLogo: getFullImageUrl(company?.logo),
       productOfferName: offerData.productOfferName,
       discountSize: offerData.discountSize,
       offerEndDate: offerData.offerEndDate,
@@ -108,3 +105,4 @@ export const getOffersByCompanyId = async (companyId) => {
 
   return offers;
 };
+

@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Alert } from 'react-native';
-import { router } from 'expo-router';
 import { useAuthContext } from '../contexts/AuthContext';
 import { FirebaseError } from 'firebase/app';
 
@@ -41,14 +40,10 @@ export const useAuth = () => {
     try {
       if (mode === 'signup') {
         await register(name, email, password);
-        Alert.alert('Success', 'Account created successfully', [
-        { text: 'OK', onPress: () => router.replace('/') },
-      ]);
+        Alert.alert('Success', 'Account created successfully');
       } else {
         await login(email, password);
-        Alert.alert('Success', 'Logged in successfully', [
-          { text: 'OK', onPress: () => router.replace('/') },
-        ]);
+        Alert.alert('Success', 'Logged in successfully');
       }
     } catch (error: any) {
       const errorMessage = error instanceof FirebaseError

@@ -124,14 +124,50 @@ export const users = [
   {
     name: 'John Doe',
     email: 'john.doe@example.com',
+    role: 'client',
   },
   {
     name: 'Jane Smith',
     email: 'jane.smith@example.com',
+    role: 'client',
   },
   {
     name: 'Bob Johnson',
     email: 'bob.johnson@example.com',
+    role: 'client',
+  },
+];
+
+export const adminUsers = [
+  {
+    name: 'Nike Admin',
+    email: 'admin@nike.com',
+    role: 'admin',
+    companyIndex: 0,
+  },
+  {
+    name: 'Adidas Admin',
+    email: 'admin@adidas.com',
+    role: 'admin',
+    companyIndex: 1,
+  },
+  {
+    name: 'Zara Admin',
+    email: 'admin@zara.com',
+    role: 'admin',
+    companyIndex: 2,
+  },
+  {
+    name: 'H&M Admin',
+    email: 'admin@hm.com',
+    role: 'admin',
+    companyIndex: 3,
+  },
+  {
+    name: 'Puma Admin',
+    email: 'admin@puma.com',
+    role: 'admin',
+    companyIndex: 4,
   },
 ];
 
