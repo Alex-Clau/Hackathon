@@ -27,6 +27,7 @@ export const getAllOffers = async () => {
       companyLogo: getFullImageUrl(company?.logo),
       productOfferName: offerData.productOfferName,
       discountSize: offerData.discountSize,
+      description: offerData.description || '',
       offerEndDate: offerData.offerEndDate,
       createdAt: offerData.createdAt,
     });
@@ -98,6 +99,7 @@ export const getOffersByCompanyId = async (companyId) => {
       companyLogo: getFullImageUrl(company?.logo),
       productOfferName: offerData.productOfferName,
       discountSize: offerData.discountSize,
+      description: offerData.description || '',
       offerEndDate: offerData.offerEndDate,
       createdAt: offerData.createdAt,
     });

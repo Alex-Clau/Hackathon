@@ -1,7 +1,7 @@
 import { FlatList } from "react-native";
 import { router } from "expo-router";
 import { useAuthContext } from "../../contexts/AuthContext";
-import OfferCard from "./OfferCard";
+import CompanyCard from "./CompanyCard";
 import { Offer } from "../../hooks/useOffers";
 
 interface OffersListProps {
@@ -24,7 +24,7 @@ export const OffersList = ({ offers }: OffersListProps) => {
     <FlatList
       data={offers}
       renderItem={({ item, index }) => (
-        <OfferCard
+        <CompanyCard
           image={item.imageUrl}
           companyName={item.companyName}
           offersCount={item.offersCount}

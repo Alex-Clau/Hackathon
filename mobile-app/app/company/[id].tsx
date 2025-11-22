@@ -1,76 +1,83 @@
-import {
-  View,
-  Text,
-  FlatList,
-  ActivityIndicator,
-  Pressable,
-} from "react-native";
+import { View, Text, FlatList, Pressable, Linking } from "react-native";
 import { useLocalSearchParams, router } from "expo-router";
 import { useState, useEffect } from "react";
-import { collection, query, where, getDocs } from "firebase/firestore";
+import { collection, query, where, getDocs, doc, getDoc } from "firebase/firestore";
+import { Ionicons } from "@expo/vector-icons";
 import { db } from "../../firebase/firebaseConfig";
+import { LoadingScreen } from "../../components/home/LoadingScreen";
+import { OfferCard } from "../../components/offers/OfferCard";
+import { useUserOffers } from "../../hooks/offers/useUserOffers";
+import { useAuthContext } from "../../contexts/AuthContext";
 
 interface CompanyOffer {
   id: string;
   companyId: string;
   productOfferName: string;
   discountSize: string;
+  description?: string;
   offerEndDate: any;
   createdAt: any;
 }
 
 export default function CompanyOffersScreen() {
   const { id: companyId } = useLocalSearchParams();
+  const { user } = useAuthContext();
+  const { userOffers, activateOffer } = useUserOffers();
   const [offers, setOffers] = useState<CompanyOffer[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [companyName, setCompanyName] = useState<string>("");
 
   useEffect(() => {
-    fetchCompanyOffers();
+    const fetchData = async () => {
+      try {
+        setLoading(true);
+        const [companyDoc, offersSnapshot] = await Promise.all([
+          getDoc(doc(db, "companies", companyId as string)),
+          getDocs(query(collection(db, "offers"), where("companyId", "==", companyId))),
+        ]);
+
+        if (companyDoc.exists()) {
+          setCompanyName(companyDoc.data().name || "");
+        }
+
+        setOffers(
+          offersSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() } as CompanyOffer))
+        );
+        setError(null);
+      } catch (err) {
+        console.error("Error fetching data:", err);
+        setError("Failed to fetch offers");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
   }, [companyId]);
 
-  const fetchCompanyOffers = async () => {
-    try {
-      setLoading(true);
-      const offersRef = collection(db, "offers");
-      const q = query(offersRef, where("companyId", "==", companyId));
-      const querySnapshot = await getDocs(q);
+    const openMaps = () => {
+      if (!companyName) return;
+      const searchQuery = `${companyName} store`;
+      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
+      Linking.openURL(url).catch((err) => console.error("Error opening maps:", err));
+    };
 
-      const fetchedOffers: CompanyOffer[] = querySnapshot.docs.map(
-        (doc) =>
-          ({
-            id: doc.id,
-            ...doc.data(),
-          } as CompanyOffer)
-      );
+    const isOfferActive = (date: any) => {
+      if (!date) return false;
+      const endDate = date.toDate ? date.toDate() : new Date(date);
+      return endDate > new Date();
+    };
 
-      setOffers(fetchedOffers);
-      setError(null);
-    } catch (err) {
-      console.error("Error fetching company offers:", err);
-      setError("Failed to fetch offers");
-    } finally {
-      setLoading(false);
-    }
+  const isOfferActivated = (offerId: string) => {
+    return userOffers.some((uo) => uo.offerId === offerId);
   };
 
-  if (loading) {
-    return (
-      <View 
-        className="flex-1 justify-center items-center"
-        style={{ backgroundColor: "#DAD7CD" }}
-      >
-        <ActivityIndicator size="large" color="#588157" />
-      </View>
-    );
-  }
+  if (loading) return <LoadingScreen />;
 
   if (error) {
     return (
-      <View 
-        className="flex-1 justify-center items-center px-6"
-        style={{ backgroundColor: "#DAD7CD" }}
-      >
+      <View className="flex-1 justify-center items-center px-6" style={{ backgroundColor: "#DAD7CD" }}>
         <Text style={{ color: "#DC2626" }} className="text-center">{error}</Text>
         <Pressable
           onPress={() => router.back()}
@@ -83,97 +90,50 @@ export default function CompanyOffersScreen() {
     );
   }
 
-  const formatDate = (date: any) => {
-    if (!date) return "N/A";
-    if (date.toDate) {
-      return date.toDate().toLocaleDateString();
-    }
-    return new Date(date).toLocaleDateString();
-  };
-
-  const isOfferActive = (date: any) => {
-    if (!date) return false;
-    const endDate = date.toDate ? date.toDate() : new Date(date);
-    return endDate > new Date();
-  };
-
   return (
     <View className="flex-1" style={{ backgroundColor: "#DAD7CD" }}>
-      {/* Header */}
-      <View 
-        className="px-6 pt-16 pb-6"
-        style={{ backgroundColor: "#3A5A40" }}
-      >
-        <Pressable
-          onPress={() => router.back()}
-          className="mb-4 self-start"
-        >
-          <Text style={{ color: "#DAD7CD", fontSize: 16 }}>← Back</Text>
-        </Pressable>
-        <Text 
-          className="text-3xl font-bold mb-2"
-          style={{ color: "#DAD7CD" }}
-        >
-          Company Offers
+      <View className="px-6 pt-16 pb-6" style={{ backgroundColor: "#3A5A40" }}>
+        <View className="flex-row items-center justify-between mb-4">
+          <Pressable onPress={() => router.back()}>
+            <Text style={{ color: "#DAD7CD", fontSize: 16 }}>← Back</Text>
+          </Pressable>
+          {companyName && (
+            <Pressable
+              onPress={openMaps}
+              className="px-4 py-2 rounded-xl flex-row items-center"
+              style={{ backgroundColor: "#588157" }}
+            >
+              <Ionicons name="map-outline" size={16} color="#FFFFFF" style={{ marginRight: 6 }} />
+              <Text className="text-white font-semibold text-sm">Closest Location</Text>
+            </Pressable>
+          )}
+        </View>
+        <Text className="text-3xl font-bold mb-2" style={{ color: "#DAD7CD" }}>
+          {companyName || "Company Offers"}
         </Text>
         <Text style={{ color: "#A3B18A" }}>
           {offers.length} {offers.length === 1 ? "offer" : "offers"} available
         </Text>
       </View>
 
-      {/* Offers List */}
       <FlatList
         data={offers}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => {
-          const isActive = isOfferActive(item.offerEndDate);
           return (
-            <View
-              className="rounded-xl p-5 mb-4 mx-4"
-              style={{
-                backgroundColor: "#FFFFFF",
-                borderLeftWidth: 4,
-                borderLeftColor: isActive ? "#588157" : "#A3B18A",
-              }}
-            >
-              <Text
-                className="text-xl font-bold mb-2"
-                style={{ color: "#344E41" }}
-              >
-                {item.productOfferName}
-              </Text>
-              <View className="flex-row items-center justify-between mb-2">
-                <View
-                  className="px-3 py-1 rounded-full"
-                  style={{ backgroundColor: "#A3B18A" }}
-                >
-                  <Text
-                    className="font-semibold"
-                    style={{ color: "#344E41" }}
-                  >
-                    {item.discountSize}
-                  </Text>
-                </View>
-                <View
-                  className="px-3 py-1 rounded-full"
-                  style={{
-                    backgroundColor: isActive ? "#A3B18A" : "#DAD7CD",
-                  }}
-                >
-                  <Text
-                    className="text-xs font-semibold"
-                    style={{
-                      color: isActive ? "#344E41" : "#588157",
-                    }}
-                  >
-                    {isActive ? "Active" : "Expired"}
-                  </Text>
-                </View>
-              </View>
-              <Text style={{ color: "#3A5A40", fontSize: 14 }}>
-                Valid until: {formatDate(item.offerEndDate)}
-              </Text>
-            </View>
+            <OfferCard
+              productOfferName={item.productOfferName}
+              discountSize={item.discountSize}
+              description={item.description}
+              offerEndDate={item.offerEndDate}
+              isActive={isOfferActive(item.offerEndDate)}
+              offerId={user ? item.id : undefined}
+              onActivate={user ? async (id) => {
+                const result = await activateOffer(id, companyId as string);
+                return result ?? false;
+              } : undefined}
+              isActivated={user ? isOfferActivated(item.id) : false}
+            />
           );
         }}
         contentContainerStyle={{ paddingVertical: 16 }}
@@ -188,4 +148,3 @@ export default function CompanyOffersScreen() {
     </View>
   );
 }
-

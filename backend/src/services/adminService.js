@@ -30,11 +30,18 @@ export const getAdminStats = async (companyId) => {
     totalEngagements,
     offers: offers.map((offer) => {
       const endDate = offer.offerEndDate?.toDate ? offer.offerEndDate.toDate() : new Date(offer.offerEndDate);
+      // Convert Firestore Timestamp to ISO string for API response
+      const offerEndDateValue = offer.offerEndDate?.toDate 
+        ? offer.offerEndDate.toDate().toISOString()
+        : (offer.offerEndDate instanceof Date 
+          ? offer.offerEndDate.toISOString() 
+          : offer.offerEndDate);
       return {
         id: offer.id,
         productOfferName: offer.productOfferName,
         discountSize: offer.discountSize,
-        offerEndDate: offer.offerEndDate,
+        description: offer.description || '',
+        offerEndDate: offerEndDateValue,
         isActive: endDate > now,
       };
     }),

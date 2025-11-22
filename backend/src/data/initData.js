@@ -28,18 +28,21 @@ export const offers = [
     companyIndex: 0,
     productOfferName: 'Air Max Running Shoes Collection',
     discountSize: '30%',
+    description: 'Bring 4kgs of Nike clothing items to activate this offer',
     offerEndDate: new Date('2024-12-31'), // Far out
   },
   {
     companyIndex: 0,
     productOfferName: 'Dri-FIT Sportswear Bundle',
     discountSize: '$50 off',
+    description: 'Collect 3kgs of Nike sportswear to unlock this discount',
     offerEndDate: new Date('2024-11-30'), // Soon
   },
   {
     companyIndex: 0,
     productOfferName: 'Jordan Retro Sneakers',
     discountSize: '25%',
+    description: 'Donate 5kgs of Nike apparel to redeem this exclusive offer',
     offerEndDate: new Date('2024-10-15'), // Expired
   },
   // Adidas (3 offers)
@@ -47,18 +50,21 @@ export const offers = [
     companyIndex: 1,
     productOfferName: 'Ultraboost Running Shoes',
     discountSize: '25%',
+    description: 'Bring 4.5kgs of Adidas clothing to activate this offer',
     offerEndDate: new Date('2024-12-15'), // Far out
   },
   {
     companyIndex: 1,
     productOfferName: 'Originals Streetwear Collection',
     discountSize: '$40 off',
+    description: 'Collect 3.5kgs of Adidas items to unlock this discount',
     offerEndDate: new Date('2024-11-05'), // Soon
   },
   {
     companyIndex: 1,
     productOfferName: 'Yeezy Collection - Select Items',
     discountSize: '20%',
+    description: 'Donate 6kgs of Adidas apparel to redeem this special offer',
     offerEndDate: new Date('2024-09-20'), // Expired
   },
   // Zara (3 offers)
@@ -66,18 +72,21 @@ export const offers = [
     companyIndex: 2,
     productOfferName: 'Winter Coat Collection',
     discountSize: '40%',
+    description: 'Bring 5kgs of Zara clothing to activate this winter offer',
     offerEndDate: new Date('2024-12-20'), // Far out
   },
   {
     companyIndex: 2,
     productOfferName: 'Business Casual Attire',
     discountSize: '$60 off',
+    description: 'Collect 3kgs of Zara professional wear to unlock this discount',
     offerEndDate: new Date('2024-11-18'), // Soon
   },
   {
     companyIndex: 2,
     productOfferName: 'Summer Dresses & Tops',
     discountSize: '35%',
+    description: 'Donate 4kgs of Zara summer clothing to redeem this offer',
     offerEndDate: new Date('2024-10-01'), // Expired
   },
   // H&M (3 offers)
@@ -85,18 +94,21 @@ export const offers = [
     companyIndex: 3,
     productOfferName: 'Denim Jeans Collection',
     discountSize: '30%',
+    description: 'Bring 4kgs of H&M clothing to activate this denim offer',
     offerEndDate: new Date('2024-11-25'), // Soon
   },
   {
     companyIndex: 3,
     productOfferName: 'Basic Essentials Bundle',
     discountSize: '$25 off',
+    description: 'Collect 2.5kgs of H&M basics to unlock this discount',
     offerEndDate: new Date('2024-12-28'), // Far out
   },
   {
     companyIndex: 3,
     productOfferName: 'Kids Clothing Collection',
     discountSize: '40%',
+    description: 'Donate 5kgs of H&M kids clothing to redeem this family offer',
     offerEndDate: new Date('2024-08-31'), // Expired
   },
   // Puma (3 offers)
@@ -104,18 +116,21 @@ export const offers = [
     companyIndex: 4,
     productOfferName: 'RS-X Sneakers Collection',
     discountSize: '30%',
+    description: 'Bring 4kgs of Puma clothing to activate this sneaker offer',
     offerEndDate: new Date('2024-12-10'), // Soon
   },
   {
     companyIndex: 4,
     productOfferName: 'Training Apparel Bundle',
     discountSize: '$35 off',
+    description: 'Collect 3.5kgs of Puma sportswear to unlock this training discount',
     offerEndDate: new Date('2024-12-31'), // Far out
   },
   {
     companyIndex: 4,
     productOfferName: 'Classic Suede Sneakers',
     discountSize: '25%',
+    description: 'Donate 5kgs of Puma apparel to redeem this classic offer',
     offerEndDate: new Date('2024-09-15'), // Expired
   },
 ];
@@ -172,56 +187,69 @@ export const adminUsers = [
 ];
 
 // Users-Offers: uses indices to reference user and offer
+// status: 'pending', 'active', or 'redeemed'
 export const usersOffers = [
-  // John Doe - 4 offers
+  // John Doe - 4 offers (mix of pending and active)
   {
     userIndex: 0,
-    offerIndex: 0, // Air Max Running Shoes
-  },
-  {
-    userIndex: 0,
-    offerIndex: 6, // Winter Coat Collection
+    offerIndex: 0, // Air Max Running Shoes - Nike
+    status: 'active',
   },
   {
     userIndex: 0,
-    offerIndex: 9, // Denim Jeans Collection
+    offerIndex: 6, // Winter Coat Collection - Zara
+    status: 'pending',
   },
   {
     userIndex: 0,
-    offerIndex: 12, // RS-X Sneakers Collection
+    offerIndex: 9, // Denim Jeans Collection - H&M
+    status: 'active',
   },
-  // Jane Smith - 4 offers
+  {
+    userIndex: 0,
+    offerIndex: 12, // RS-X Sneakers Collection - Puma
+    status: 'pending',
+  },
+  // Jane Smith - 4 offers (mix of pending and active)
   {
     userIndex: 1,
-    offerIndex: 1, // Dri-FIT Sportswear Bundle
+    offerIndex: 1, // Dri-FIT Sportswear Bundle - Nike
+    status: 'active',
   },
   {
     userIndex: 1,
-    offerIndex: 7, // Business Casual Attire
+    offerIndex: 7, // Business Casual Attire - Zara
+    status: 'active',
   },
   {
     userIndex: 1,
-    offerIndex: 10, // Basic Essentials Bundle
+    offerIndex: 10, // Basic Essentials Bundle - H&M
+    status: 'pending',
   },
   {
     userIndex: 1,
-    offerIndex: 13, // Training Apparel Bundle
+    offerIndex: 13, // Training Apparel Bundle - Puma
+    status: 'active',
   },
-  // Bob Johnson - 4 offers
+  // Bob Johnson - 4 offers (mix of pending and active)
   {
     userIndex: 2,
-    offerIndex: 2, // Jordan Retro Sneakers
-  },
-  {
-    userIndex: 2,
-    offerIndex: 5, // Yeezy Collection
+    offerIndex: 2, // Jordan Retro Sneakers - Nike
+    status: 'pending',
   },
   {
     userIndex: 2,
-    offerIndex: 8, // Summer Dresses & Tops
+    offerIndex: 5, // Yeezy Collection - Adidas
+    status: 'active',
   },
   {
     userIndex: 2,
-    offerIndex: 14, // Classic Suede Sneakers
+    offerIndex: 8, // Summer Dresses & Tops - Zara
+    status: 'active',
+  },
+  {
+    userIndex: 2,
+    offerIndex: 14, // Classic Suede Sneakers - Puma
+    status: 'pending',
   },
 ];

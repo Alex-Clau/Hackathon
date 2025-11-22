@@ -17,6 +17,8 @@ export const getUserOffers = async (userId) => {
         id: doc.id,
         offerId: userOfferData.offerId,
         userId: userOfferData.userId,
+        status: userOfferData.status || 'pending',
+        createdAt: userOfferData.createdAt,
         offer,
       });
     }

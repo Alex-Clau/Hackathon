@@ -1,6 +1,6 @@
-import { db } from '../config/firebase.js';
-import { companies, offers, usersOffers } from '../data/initData.js';
-import { initAdminMetadata } from './adminMetadataService.js';
+import {db} from '../config/firebase.js';
+import {companies, offers, usersOffers} from '../data/initData.js';
+import {initAdminMetadata} from './adminMetadataService.js';
 
 export const initCompanies = async () => {
   const companyIds = [];
@@ -8,7 +8,7 @@ export const initCompanies = async () => {
     const docRef = await db.collection('companies').add(company);
     companyIds.push(docRef.id);
   }
-  return { companyIds, count: companyIds.length };
+  return {companyIds, count: companyIds.length};
 };
 
 export const initOffers = async (companyIds) => {
@@ -25,16 +25,17 @@ export const initOffers = async (companyIds) => {
       companyId,
       productOfferName: offer.productOfferName,
       discountSize: offer.discountSize,
+      description: offer.description || '',
       offerEndDate: offer.offerEndDate,
       createdAt: new Date(),
     });
     offerIds.push(docRef.id);
   }
-  return { offerIds, count: offerIds.length };
+  return {offerIds, count: offerIds.length};
 };
 
 export const initUsers = async () => {
-  return { message: 'Users are now created via Firebase Auth. Use /api/init/admin-metadata to initialize admin metadata.' };
+  return {message: 'Users are now created via Firebase Auth. Use /api/init/admin-metadata to initialize admin metadata.'};
 };
 
 export const initUsersOffers = async (userIds, offerIds) => {
@@ -55,7 +56,7 @@ export const initUsersOffers = async (userIds, offerIds) => {
     });
     relationshipIds.push(docRef.id);
   }
-  return { relationshipIds, count: relationshipIds.length };
+  return {relationshipIds, count: relationshipIds.length};
 };
 
 export const initAll = async () => {
@@ -70,9 +71,9 @@ export const initAll = async () => {
   const adminMetadataResult = await initAdminMetadata(companiesResult.companyIds);
   results.adminMetadata = adminMetadataResult;
 
-  results.users = { message: 'Users are created via Firebase Auth on signup' };
+  results.users = {message: 'Users are created via Firebase Auth on signup'};
 
-  results.usersOffers = { message: 'User-offer relationships require existing users' };
+  results.usersOffers = {message: 'User-offer relationships require existing users'};
 
   return results;
 };
