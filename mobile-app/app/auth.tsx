@@ -12,6 +12,7 @@ import { EmailInput } from '../components/auth/EmailInput';
 import { PasswordInput } from '../components/auth/PasswordInput';
 import { SubmitButton } from '../components/auth/SubmitButton';
 import { AuthToggle } from '../components/auth/AuthToggle';
+import { GradientBackground } from '../components/common/GradientBackground';
 
 export default function AuthScreen() {
   const {
@@ -29,11 +30,11 @@ export default function AuthScreen() {
   } = useAuth();
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      className="flex-1"
-      style={{ backgroundColor: '#DAD7CD' }}
-    >
+    <GradientBackground variant="light">
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        className="flex-1"
+      >
       <ScrollView
         className="flex-grow px-6 py-12"
         contentContainerStyle={{ justifyContent: 'center', flexGrow: 1 }}
@@ -72,5 +73,6 @@ export default function AuthScreen() {
         </View>
       </ScrollView>
     </KeyboardAvoidingView>
+    </GradientBackground>
   );
 }

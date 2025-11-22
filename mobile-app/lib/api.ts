@@ -70,6 +70,19 @@ class ApiClient {
   async getAdminStats(email: string) {
     return this.request(`/admin/stats/${encodeURIComponent(email)}`);
   }
+
+  async estimateQuality(base64Image: string) {
+    return this.request<{
+      tier: 'DONATE' | 'RECYCLE' | 'REJECT';
+      recommendation: string;
+      conditionSummary: string;
+      confidence: number;
+      qualityScore: number;
+    }>('/ai/quality-check', {
+      method: 'POST',
+      body: JSON.stringify({ image: base64Image }),
+    });
+  }
 }
 
 export const apiClient = new ApiClient(API_BASE_URL);

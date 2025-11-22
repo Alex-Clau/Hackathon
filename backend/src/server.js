@@ -9,6 +9,7 @@ import offersRoutes from './routes/offersRoutes.js';
 import userOffersRoutes from './routes/userOffersRoutes.js';
 import userRoutes from './routes/userRoutes.js';
 import adminRoutes from './routes/adminRoutes.js';
+import aiRoutes from './routes/aiRoutes.js';
 
 dotenv.config();
 
@@ -20,8 +21,8 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '50mb' }));
+app.use(express.urlencoded({ extended: true, limit: '50mb' }));
 
 // Health check route
 app.get('/health', (req, res) => {
@@ -42,6 +43,7 @@ app.use('/api/offers', offersRoutes);
 app.use('/api/users', userOffersRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/ai', aiRoutes);
 
 // Initialization routes
 app.use('/api/init', initRoutes);

@@ -15,21 +15,21 @@ export const ProfileHeader = ({
   onBackPress,
 }: ProfileHeaderProps) => {
   return (
-    <View className="bg-[#3A5A40] px-6 pt-16 pb-6">
+    <View className="bg-[#1A4D2E] px-6 pt-16 pb-6">
       <View className="flex-row items-center mb-4">
         <Pressable onPress={onBackPress} className="mr-3">
-          <Ionicons name="arrow-back" size={24} color="#DAD7CD" />
+          <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
         </Pressable>
-        <Text className="text-2xl font-bold" style={{ color: "#DAD7CD" }}>
+        <Text className="text-2xl font-bold" style={{ color: "#FFFFFF" }}>
           {title}
         </Text>
       </View>
       {(userName || userEmail) && (
         <View className="mt-2">
-          <Text className="text-lg" style={{ color: "#A3B18A" }}>
+          <Text className="text-lg" style={{ color: "#E8DFCA" }}>
             {userName || "User"}
           </Text>
-          <Text className="text-sm" style={{ color: "#A3B18A" }}>
+          <Text className="text-sm" style={{ color: "#E8DFCA" }}>
             {userEmail}
           </Text>
         </View>

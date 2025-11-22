@@ -9,7 +9,7 @@ export const AddOfferSection = ({ onAddOffer }: AddOfferSectionProps) => {
   return (
     <View className="bg-white m-4 p-6 rounded-xl shadow-sm">
       <View className="flex-row items-center mb-4">
-        <Ionicons name="add-circle-outline" size={28} color="#3A5A40" />
+        <Ionicons name="add-circle-outline" size={28} color="#1A4D2E" />
         <Text className="text-xl font-bold text-gray-800 ml-3">Add Offer</Text>
       </View>
       <Text className="text-gray-600 mb-4">
@@ -17,7 +17,7 @@ export const AddOfferSection = ({ onAddOffer }: AddOfferSectionProps) => {
       </Text>
 
       <TouchableOpacity
-        className="bg-[#3A5A40] py-3 px-4 rounded-lg"
+        className="bg-[#1A4D2E] py-3 px-4 rounded-lg"
         onPress={onAddOffer}
       >
         <Text className="text-white text-center font-semibold text-base">

@@ -25,11 +25,11 @@ export const QRInfoModal = ({ visible, onClose, title, items }: QRInfoModalProps
       <View style={styles.modalOverlay}>
         <View style={styles.modalContent}>
           <View className="flex-row items-center justify-between mb-4">
-            <Text className="text-xl font-bold" style={{ color: "#3A5A40" }}>
+            <Text className="text-xl font-bold" style={{ color: "#1A4D2E" }}>
               {title}
             </Text>
             <TouchableOpacity onPress={onClose}>
-              <Ionicons name="close" size={24} color="#3A5A40" />
+              <Ionicons name="close" size={24} color="#1A4D2E" />
             </TouchableOpacity>
           </View>
 
@@ -43,17 +43,17 @@ export const QRInfoModal = ({ visible, onClose, title, items }: QRInfoModalProps
                 <Ionicons
                   name={item.icon as any}
                   size={24}
-                  color="#588157"
+                  color="#4F6F52"
                   style={{ marginRight: 12 }}
                 />
                 <View className="flex-1">
                   <Text
                     className="text-base font-semibold mb-1"
-                    style={{ color: "#344E41" }}
+                    style={{ color: "#1A4D2E" }}
                   >
                     {item.title}
                   </Text>
-                  <Text className="text-sm" style={{ color: "#588157" }}>
+                  <Text className="text-sm" style={{ color: "#4F6F52" }}>
                     {item.description}
                   </Text>
                 </View>
@@ -63,7 +63,7 @@ export const QRInfoModal = ({ visible, onClose, title, items }: QRInfoModalProps
 
           <TouchableOpacity
             className="mt-6 py-3 px-4 rounded-lg"
-            style={{ backgroundColor: "#3A5A40" }}
+            style={{ backgroundColor: "#1A4D2E" }}
             onPress={onClose}
           >
             <Text className="text-white text-center font-semibold">Got it!</Text>

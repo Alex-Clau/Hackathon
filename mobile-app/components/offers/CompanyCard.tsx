@@ -17,12 +17,12 @@ interface CompanyCardProps {
 }
 
 const CompanyCard: React.FC<CompanyCardProps> = ({
-  image,
-  companyName,
-  offersCount,
-  onPress,
-  index = 0,
-}) => {
+                                                   image,
+                                                   companyName,
+                                                   offersCount,
+                                                   onPress,
+                                                   index = 0,
+                                                 }) => {
   const [imageError, setImageError] = useState(false);
 
   const opacity = useSharedValue(0);
@@ -64,73 +64,112 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
   });
 
   const getPlaceholderColor = (name: string) => {
-    const colors = ['#588157', '#3A5A40', '#344E41', '#A3B18A'];
+    const colors = ['#4F6F52', '#1A4D2E', '#2D5F3F', '#3A7049'];
     const index = name.length % colors.length;
     return colors[index];
   };
 
   return (
     <Animated.View
-      className="rounded-2xl overflow-hidden mb-4 mx-6"
-      style={[
-        {
+      className="mb-4 mx-4"
+      style={animatedStyle}
+    >
+      {/* Paper stack layers behind */}
+      <View
+        className="absolute rounded-2xl"
+        style={{
+          top: 6,
+          left: 3,
+          right: -3,
+          height: '100%',
+          backgroundColor: '#D4C5B0',
+          opacity: 0.4,
+        }}
+      />
+      <View
+        className="absolute rounded-2xl"
+        style={{
+          top: 3,
+          left: 1.5,
+          right: -1.5,
+          height: '100%',
+          backgroundColor: '#DDD5C7',
+          opacity: 0.6,
+        }}
+      />
+
+      {/* Main card */}
+      <View
+        className="rounded-2xl overflow-hidden"
+        style={{
           backgroundColor: '#FFFFFF',
-          shadowColor: '#344E41',
+          shadowColor: '#000',
           shadowOffset: {width: 0, height: 2},
           shadowOpacity: 0.1,
           shadowRadius: 8,
-          elevation: 4,
-        },
-        animatedStyle,
-      ]}
-    >
-      <View className="p-4 flex-row items-center">
-        <View className="mr-4">
-          {image && !imageError ? (
-            <Image
-              source={{uri: image}}
-              className="w-20 h-20 rounded-xl bg-white"
-              resizeMode="contain"
-              onError={() => setImageError(true)}
-            />
-          ) : (
-            <View
-              className="w-20 h-20 rounded-xl items-center justify-center"
-              style={{backgroundColor: getPlaceholderColor(companyName)}}
+          elevation: 3,
+          borderWidth: 1,
+          borderColor: '#F0EBE3',
+        }}
+      >
+        <View className="p-4 flex-row items-center">
+          <View className="mr-4">
+            {image && !imageError ? (
+              <View
+                className="rounded-xl overflow-hidden"
+                style={{
+                  backgroundColor: '#FAFAFA',
+                  padding: 8,
+                }}
+              >
+                <Image
+                  source={{uri: image}}
+                  className="w-16 h-16"
+                  resizeMode="contain"
+                  onError={() => setImageError(true)}
+                />
+              </View>
+            ) : (
+              <View
+                className="w-20 h-20 rounded-xl items-center justify-center"
+                style={{
+                  backgroundColor: getPlaceholderColor(companyName),
+                }}
+              >
+                <Text className="text-white text-2xl font-bold">
+                  {companyName.charAt(0)}
+                </Text>
+              </View>
+            )}
+          </View>
+
+          <View className="flex-1 justify-center">
+            <Text
+              className="text-lg font-bold mb-1"
+              style={{color: '#1A4D2E'}}
+              numberOfLines={2}
             >
-              <Text className="text-white text-2xl font-bold">
-                {companyName.charAt(0)}
-              </Text>
-            </View>
-          )}
-        </View>
-
-        <View className="flex-1 justify-center">
-          <Text
-            className="text-lg font-bold mb-1"
-            style={{color: '#344E41'}}
-            numberOfLines={2}
-          >
-            {companyName}
-          </Text>
-          <Text
-            className="text-sm font-medium"
-            style={{color: '#588157'}}
-          >
-            {offersCount} {offersCount === 1 ? 'offer' : 'offers'}
-          </Text>
-        </View>
-
-        <View className="ml-2">
-          <Pressable
-            onPress={onPress}
-            className="py-3 px-5 rounded-xl active:opacity-80"
-            style={{backgroundColor: '#588157'}}
-          >
-            <Text className="text-white text-center font-semibold text-sm">
-              View
+              {companyName}
             </Text>
-          </Pressable>
+            <Text
+              className="text-sm font-medium"
+              style={{color: '#4F6F52'}}
+            >
+              {offersCount} {offersCount === 1 ? 'offer' : 'offers'}
+            </Text>
+          </View>
+
+          <View className="ml-2">
+            <Pressable
+              onPress={onPress}
+              className="py-3 px-5 rounded-xl active:opacity-80"
+              style={{backgroundColor: '#1A4D2E'}}
+            >
+              <Text className="text-white text-center font-semibold text-sm">
+                View
+              </Text>
+            </Pressable>
+          </View>
         </View>
       </View>
     </Animated.View>
@@ -138,4 +177,3 @@ const CompanyCard: React.FC<CompanyCardProps> = ({
 };
 
 export default CompanyCard;
-

@@ -8,6 +8,7 @@ import { LoadingScreen } from "../../components/home/LoadingScreen";
 import { OfferCard } from "../../components/offers/OfferCard";
 import { useUserOffers } from "../../hooks/offers/useUserOffers";
 import { useAuthContext } from "../../contexts/AuthContext";
+import { GradientBackground } from "../../components/common/GradientBackground";
 
 interface CompanyOffer {
   id: string;
@@ -77,41 +78,44 @@ export default function CompanyOffersScreen() {
 
   if (error) {
     return (
-      <View className="flex-1 justify-center items-center px-6" style={{ backgroundColor: "#DAD7CD" }}>
+      <GradientBackground variant="light">
+        <View className="flex-1 justify-center items-center px-6">
         <Text style={{ color: "#DC2626" }} className="text-center">{error}</Text>
         <Pressable
           onPress={() => router.back()}
           className="mt-4 px-6 py-3 rounded-xl"
-          style={{ backgroundColor: "#588157" }}
-        >
-          <Text className="text-white font-semibold">Go Back</Text>
-        </Pressable>
-      </View>
+          style={{ backgroundColor: "#1A4D2E" }}
+          >
+            <Text className="text-white font-semibold">Go Back</Text>
+          </Pressable>
+        </View>
+      </GradientBackground>
     );
   }
 
   return (
-    <View className="flex-1" style={{ backgroundColor: "#DAD7CD" }}>
-      <View className="px-6 pt-16 pb-6" style={{ backgroundColor: "#3A5A40" }}>
+    <GradientBackground variant="light">
+      <View className="flex-1">
+      <View className="px-6 pt-16 pb-6" style={{ backgroundColor: "#1A4D2E" }}>
         <View className="flex-row items-center justify-between mb-4">
           <Pressable onPress={() => router.back()}>
-            <Text style={{ color: "#DAD7CD", fontSize: 16 }}>← Back</Text>
+            <Text style={{ color: "#E8DFCA", fontSize: 16 }}>← Back</Text>
           </Pressable>
           {companyName && (
             <Pressable
               onPress={openMaps}
               className="px-4 py-2 rounded-xl flex-row items-center"
-              style={{ backgroundColor: "#588157" }}
+              style={{ backgroundColor: "#4F6F52" }}
             >
               <Ionicons name="map-outline" size={16} color="#FFFFFF" style={{ marginRight: 6 }} />
               <Text className="text-white font-semibold text-sm">Closest Location</Text>
             </Pressable>
           )}
         </View>
-        <Text className="text-3xl font-bold mb-2" style={{ color: "#DAD7CD" }}>
+        <Text className="text-3xl font-bold mb-2" style={{ color: "#FFFFFF" }}>
           {companyName || "Company Offers"}
         </Text>
-        <Text style={{ color: "#A3B18A" }}>
+        <Text style={{ color: "#E8DFCA" }}>
           {offers.length} {offers.length === 1 ? "offer" : "offers"} available
         </Text>
       </View>
@@ -139,12 +143,13 @@ export default function CompanyOffersScreen() {
         contentContainerStyle={{ paddingVertical: 16 }}
         ListEmptyComponent={
           <View className="flex-1 justify-center items-center p-8">
-            <Text style={{ color: "#588157" }} className="text-center">
+            <Text style={{ color: "#4F6F52" }} className="text-center">
               No offers available for this company
             </Text>
           </View>
         }
       />
     </View>
+    </GradientBackground>
   );
 }

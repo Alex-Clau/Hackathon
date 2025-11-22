@@ -16,6 +16,10 @@ npm install
      - `EXPO_PUBLIC_FIREBASE_PROJECT_ID`: Your Firebase project ID
      - `EXPO_PUBLIC_FIREBASE_PRIVATE_KEY`: Your Firebase service account private key (with `\n` for newlines)
      - `EXPO_PUBLIC_FIREBASE_CLIENT_EMAIL`: Your Firebase service account email
+   - Google Cloud Vision API (for AI quality check):
+     - `GOOGLE_CLOUD_VISION_API_KEY`: Your Google Cloud Vision API key
+     - OR `GOOGLE_APPLICATION_CREDENTIALS`: Path to service account JSON file
+     - Note: Requires billing to be enabled (free tier: 1,000 requests/month)
 
 3. Get Firebase Admin SDK credentials:
    - Go to Firebase Console → Project Settings → Service Accounts
@@ -44,6 +48,11 @@ npm start
 
 ### User Offers
 - **GET** `/api/users/:userId/offers` - Get all offers for a specific user
+
+### AI Quality Check
+- **POST** `/api/ai/quality-check` - Analyze clothing item quality (requires image base64)
+  - Body: `{ "image": "base64ImageString" }`
+  - Returns: `{ tier: "DONATE" | "RECYCLE" | "REJECT", recommendation, conditionSummary, confidence, qualityScore }`
 
 ### Initialization (Seeding)
 - **POST** `/api/init/all` - Initialize all data (companies, offers, users, user-offers)

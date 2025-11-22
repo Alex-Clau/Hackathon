@@ -15,11 +15,34 @@ import { AdminHeader } from "../components/admin/AdminHeader";
 import { StatsCard } from "../components/admin/StatsCard";
 import { OfferCard } from "../components/offers/OfferCard";
 import { Ionicons } from "@expo/vector-icons";
+import { GradientBackground } from "../components/common/GradientBackground";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from "react-native-reanimated";
+
+const AnimatedTouchableOpacity = Animated.createAnimatedComponent(TouchableOpacity);
 
 export default function AdminDashboard() {
   const { user, userData } = useAuthContext();
   const { stats, loading, refreshing, onRefresh } = useAdminStats();
   const insets = useSafeAreaInsets();
+  const buttonScale = useSharedValue(1);
+
+  const buttonStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: buttonScale.value }],
+    };
+  });
+
+  const handleButtonPressIn = () => {
+    buttonScale.value = withSpring(0.95);
+  };
+
+  const handleButtonPressOut = () => {
+    buttonScale.value = withSpring(1);
+  };
 
   useEffect(() => {
     if (userData && userData.role !== "admin") {
@@ -33,17 +56,19 @@ export default function AdminDashboard() {
 
   if (!stats) {
     return (
-      <View
-        className="flex-1 justify-center items-center px-6"
-        style={{ backgroundColor: "#DAD7CD" }}
-      >
-        <Text style={{ color: "#3A5A40" }}>Unable to load dashboard data</Text>
-      </View>
+      <GradientBackground variant="light">
+        <View
+          className="flex-1 justify-center items-center px-6"
+        >
+          <Text style={{ color: "#1A4D2E" }}>Unable to load dashboard data</Text>
+        </View>
+      </GradientBackground>
     );
   }
 
   return (
-    <View className="flex-1" style={{ backgroundColor: "#DAD7CD" }}>
+    <GradientBackground variant="light">
+      <View className="flex-1">
       <ScrollView
         className="flex-1"
         refreshControl={
@@ -61,8 +86,8 @@ export default function AdminDashboard() {
               value={stats.totalOffers}
               label="Total Offers"
               backgroundColor="#FFFFFF"
-              textColor="#344E41"
-              labelColor="#588157"
+              textColor="#1A4D2E"
+              labelColor="#4F6F52"
               isLarge
             />
 
@@ -71,9 +96,9 @@ export default function AdminDashboard() {
                 <StatsCard
                   value={stats.activeOffers}
                   label="Active"
-                  backgroundColor="#A3B18A"
-                  textColor="#344E41"
-                  labelColor="#3A5A40"
+                  backgroundColor="#E8DFCA"
+                  textColor="#1A4D2E"
+                  labelColor="#1A4D2E"
                 />
               </View>
 
@@ -82,8 +107,8 @@ export default function AdminDashboard() {
                   value={stats.expiredOffers}
                   label="Expired"
                   backgroundColor="#FFFFFF"
-                  textColor="#344E41"
-                  labelColor="#588157"
+                  textColor="#1A4D2E"
+                  labelColor="#4F6F52"
                 />
               </View>
             </View>
@@ -91,16 +116,16 @@ export default function AdminDashboard() {
             <StatsCard
               value={stats.totalEngagements}
               label="Total Engagements"
-              backgroundColor="#588157"
+              backgroundColor="#4F6F52"
               textColor="#FFFFFF"
-              labelColor="#DAD7CD"
+              labelColor="#E8DFCA"
             />
           </View>
 
           <View className="mb-6">
             <Text
               className="text-2xl font-bold mb-4"
-              style={{ color: "#344E41" }}
+              style={{ color: "#1A4D2E" }}
             >
               All Offers
             </Text>
@@ -116,33 +141,38 @@ export default function AdminDashboard() {
         className="absolute bottom-6 left-0 right-0 items-center px-6"
         style={{ zIndex: 999 }}
       >
-        <TouchableOpacity
+        <AnimatedTouchableOpacity
           className="rounded-full px-6 py-4 flex-row items-center"
-          style={{
-            backgroundColor: "#3A5A40",
-            shadowColor: "#000",
-            shadowOffset: { width: 0, height: 4 },
-            shadowOpacity: 0.3,
-            shadowRadius: 4.65,
-            elevation: 8,
-          }}
+          style={[
+            {
+              backgroundColor: "#1A4D2E",
+              shadowColor: "#1A4D2E",
+              shadowOffset: { width: 0, height: 4 },
+              shadowOpacity: 0.4,
+              shadowRadius: 8,
+              elevation: 8,
+            },
+            buttonStyle,
+          ]}
           onPress={() => router.push("/admin-profile")}
-          activeOpacity={0.8}
+          onPressIn={handleButtonPressIn}
+          onPressOut={handleButtonPressOut}
         >
           <Ionicons
             name="qr-code-outline"
             size={24}
-            color="#DAD7CD"
+            color="#FFFFFF"
             style={{ marginRight: 8 }}
           />
           <Text
             className="font-semibold text-base"
-            style={{ color: "#DAD7CD" }}
+            style={{ color: "#FFFFFF" }}
           >
             Scan User QR Code
           </Text>
-        </TouchableOpacity>
+        </AnimatedTouchableOpacity>
       </View>
     </View>
+    </GradientBackground>
   );
 }

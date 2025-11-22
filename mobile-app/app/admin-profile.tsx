@@ -10,6 +10,7 @@ import { QRScannerSection } from "../components/profile/QRScannerSection";
 import { PendingOffersList } from "../components/admin/PendingOffersList";
 import { LogoutButton } from "../components/profile/LogoutButton";
 import { QRScannerModal } from "../components/profile/QRScannerModal";
+import { GradientBackground } from "../components/common/GradientBackground";
 
 export default function AdminProfileScreen() {
   const { user, logout } = useAuthContext();
@@ -67,39 +68,41 @@ export default function AdminProfileScreen() {
   };
 
   return (
-    <View className="flex-1 bg-gray-50">
-      <ProfileHeader
-        title="Admin Profile"
-        userName={user?.displayName}
-        userEmail={user?.email}
-        onBackPress={() => {
-          clearScannedUser();
-          handleBackPress(true);
-        }}
-      />
-      <ScrollView
-        className="flex-1"
-        contentContainerStyle={{ paddingBottom: 100 }}
-      >
-        <QRScannerSection
-          scannedUserId={scannedUserId}
-          onScanQR={handleScanQR}
+    <GradientBackground variant="light">
+      <View className="flex-1">
+        <ProfileHeader
+          title="Admin Profile"
+          userName={user?.displayName}
+          userEmail={user?.email}
+          onBackPress={() => {
+            clearScannedUser();
+            handleBackPress(true);
+          }}
         />
-        {scannedUserId && (
-          <PendingOffersList
-            pendingOffers={pendingOffers}
-            activeOffers={activeOffers}
-            onActivate={handleActivateOffer}
-            onRedeem={handleRedeemOffer}
+        <ScrollView
+          className="flex-1"
+          contentContainerStyle={{ paddingBottom: 100 }}
+        >
+          <QRScannerSection
+            scannedUserId={scannedUserId}
+            onScanQR={handleScanQR}
           />
-        )}
-      </ScrollView>
-      <LogoutButton onLogout={handleLogout} />
-      <QRScannerModal
-        visible={scanning}
-        onClose={closeScanner}
-        onBarcodeScanned={handleBarCodeScanned}
-      />
-    </View>
+          {scannedUserId && (
+            <PendingOffersList
+              pendingOffers={pendingOffers}
+              activeOffers={activeOffers}
+              onActivate={handleActivateOffer}
+              onRedeem={handleRedeemOffer}
+            />
+          )}
+        </ScrollView>
+        <LogoutButton onLogout={handleLogout} />
+        <QRScannerModal
+          visible={scanning}
+          onClose={closeScanner}
+          onBarcodeScanned={handleBarCodeScanned}
+        />
+      </View>
+    </GradientBackground>
   );
 }

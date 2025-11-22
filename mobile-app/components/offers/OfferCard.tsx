@@ -1,6 +1,13 @@
 import { View, Text, Pressable, ActivityIndicator } from "react-native";
 import { useState } from "react";
 import { Alert } from "react-native";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withTiming,
+  interpolate,
+} from "react-native-reanimated";
 
 interface OfferCardProps {
   productOfferName: string;
@@ -61,10 +68,19 @@ export const OfferCard = ({
   isActivated = false,
 }: OfferCardProps) => {
   const [loading, setLoading] = useState(false);
+  const scale = useSharedValue(1);
+  const shadowOpacity = useSharedValue(0.1);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+      shadowOpacity: shadowOpacity.value,
+    };
+  });
 
   const handleActivate = async () => {
     if (!offerId || !onActivate) return;
-    
+
     if (isActivated) {
       Alert.alert("Info", "This offer is already activated");
       return;
@@ -83,42 +99,61 @@ export const OfferCard = ({
 
   const showActivateButton = offerId && onActivate;
 
+  const handlePressIn = () => {
+    scale.value = withSpring(0.98);
+    shadowOpacity.value = withTiming(0.2);
+  };
+
+  const handlePressOut = () => {
+    scale.value = withSpring(1);
+    shadowOpacity.value = withTiming(0.1);
+  };
+
   return (
-    <View
+    <Animated.View
       className={`rounded-xl p-5 mb-4 ${showActivateButton ? "mx-4" : ""}`}
-      style={{
-        backgroundColor: "#FFFFFF",
-        borderLeftWidth: 4,
-        borderLeftColor: isActive ? "#588157" : "#A3B18A",
-      }}
+      style={[
+        {
+          backgroundColor: "#FFFFFF",
+          borderLeftWidth: 4,
+          borderLeftColor: isActive ? "#4F6F52" : "#4F6F52",
+          shadowColor: "#1A4D2E",
+          shadowOffset: { width: 0, height: 2 },
+          shadowRadius: 8,
+          elevation: 3,
+        },
+        animatedStyle,
+      ]}
+      onTouchStart={handlePressIn}
+      onTouchEnd={handlePressOut}
     >
-      <Text className="text-xl font-bold mb-2" style={{ color: "#344E41" }}>
+      <Text className="text-xl font-bold mb-2" style={{ color: "#1A4D2E" }}>
         {productOfferName}
       </Text>
       <View className="flex-row items-center justify-between mb-2">
-        <View className="px-3 py-1 rounded-full" style={{ backgroundColor: "#A3B18A" }}>
-          <Text className="font-semibold" style={{ color: "#344E41" }}>
+        <View className="px-3 py-1 rounded-full" style={{ backgroundColor: "#E8DFCA" }}>
+          <Text className="font-semibold" style={{ color: "#1A4D2E" }}>
             {discountSize}
           </Text>
         </View>
         <View
           className="px-3 py-1 rounded-full"
-          style={{ backgroundColor: isActive ? "#A3B18A" : "#DAD7CD" }}
+          style={{ backgroundColor: isActive ? "#E8DFCA" : "#F5EFE6" }}
         >
           <Text
             className="text-xs font-semibold"
-            style={{ color: isActive ? "#344E41" : "#588157" }}
+            style={{ color: isActive ? "#1A4D2E" : "#4F6F52" }}
           >
             {isActive ? "Active" : "Expired"}
           </Text>
         </View>
       </View>
       {description && (
-        <Text style={{ color: "#588157", fontSize: 13 }} className="mb-2 italic">
+        <Text style={{ color: "#4F6F52", fontSize: 13 }} className="mb-2 italic">
           {description}
         </Text>
       )}
-      <Text style={{ color: "#3A5A40", fontSize: 14 }} className={showActivateButton ? "mb-3" : ""}>
+      <Text style={{ color: "#1A4D2E", fontSize: 14 }} className={showActivateButton ? "mb-3" : ""}>
         Valid until: {formatDate(offerEndDate)}
       </Text>
       {showActivateButton && (
@@ -126,7 +161,7 @@ export const OfferCard = ({
           onPress={handleActivate}
           disabled={loading || isActivated}
           className={`px-4 py-2 rounded-xl ${
-            isActivated ? "bg-gray-400" : "bg-[#588157]"
+            isActivated ? "bg-gray-400" : "bg-[#1A4D2E]"
           }`}
         >
           {loading ? (
@@ -138,6 +173,6 @@ export const OfferCard = ({
           )}
         </Pressable>
       )}
-    </View>
+    </Animated.View>
   );
 };

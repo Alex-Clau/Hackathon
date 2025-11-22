@@ -1,5 +1,50 @@
 import { View, Text, Pressable, ScrollView } from "react-native";
 import { UserOffer } from "../../hooks/admin/usePendingOffers";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from "react-native-reanimated";
+
+const AnimatedPressable = Animated.createAnimatedComponent(Pressable);
+
+interface AnimatedButtonProps {
+  onPress: () => void;
+  className: string;
+  text: string;
+}
+
+const AnimatedButton = ({ onPress, className, text }: AnimatedButtonProps) => {
+  const scale = useSharedValue(1);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      transform: [{ scale: scale.value }],
+    };
+  });
+
+  const handlePressIn = () => {
+    scale.value = withSpring(0.95);
+  };
+
+  const handlePressOut = () => {
+    scale.value = withSpring(1);
+  };
+
+  return (
+    <AnimatedPressable
+      onPress={onPress}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+      className={className}
+      style={animatedStyle}
+    >
+      <Text className="text-white text-center font-semibold text-sm">
+        {text}
+      </Text>
+    </AnimatedPressable>
+  );
+};
 
 interface PendingOffersListProps {
   pendingOffers: UserOffer[];
@@ -56,14 +101,11 @@ export const PendingOffersList = ({
                     {userOffer.offer.description}
                   </Text>
                 )}
-                <Pressable
+                <AnimatedButton
                   onPress={() => onActivate(userOffer.id)}
-                  className="bg-[#588157] py-2 px-4 rounded-lg mt-2 mb-2"
-                >
-                  <Text className="text-white text-center font-semibold text-sm">
-                    Activate Offer
-                  </Text>
-                </Pressable>
+                  className="bg-[#1A4D2E] py-2 px-4 rounded-lg mt-2 mb-2"
+                  text="Activate Offer"
+                />
               </View>
             ))}
           </ScrollView>
@@ -98,14 +140,11 @@ export const PendingOffersList = ({
                     {userOffer.offer.description}
                   </Text>
                 )}
-                <Pressable
+                <AnimatedButton
                   onPress={() => onRedeem(userOffer.id)}
                   className="bg-[#10B981] py-2 px-4 rounded-lg mt-2 mb-2"
-                >
-                  <Text className="text-white text-center font-semibold text-sm">
-                    Redeem Offer
-                  </Text>
-                </Pressable>
+                  text="Redeem Offer"
+                />
               </View>
             ))}
           </ScrollView>

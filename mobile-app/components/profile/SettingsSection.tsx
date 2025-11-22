@@ -23,7 +23,7 @@ export const SettingsSection = ({ items }: SettingsSectionProps) => {
             className="flex-row items-center py-3"
             onPress={item.onPress || (() => {})}
           >
-            <Ionicons name={item.icon as any} size={24} color="#3A5A40" />
+            <Ionicons name={item.icon as any} size={24} color="#1A4D2E" />
             <Text className="text-gray-800 text-base ml-3 flex-1">
               {item.label}
             </Text>

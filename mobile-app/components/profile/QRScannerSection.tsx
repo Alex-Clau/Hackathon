@@ -36,7 +36,7 @@ export const QRScannerSection = ({
     <View className="bg-white m-4 p-6 rounded-xl shadow-sm">
       <View className="flex-row items-center justify-between mb-4">
         <View className="flex-row items-center">
-          <Ionicons name="qr-code-outline" size={28} color="#3A5A40" />
+          <Ionicons name="qr-code-outline" size={28} color="#1A4D2E" />
           <Text className="text-xl font-bold text-gray-800 ml-3">
             Scan User QR
           </Text>
@@ -45,7 +45,7 @@ export const QRScannerSection = ({
           <Ionicons
             name="information-circle-outline"
             size={24}
-            color="#588157"
+            color="#1A4D2E"
           />
         </TouchableOpacity>
       </View>
@@ -53,7 +53,7 @@ export const QRScannerSection = ({
         Scan a user's QR code to verify their account and add offers
       </Text>
       <TouchableOpacity
-        className="bg-[#588157] py-3 px-4 rounded-lg mb-3"
+        className="bg-[#1A4D2E] py-3 px-4 rounded-lg mb-3"
         onPress={onScanQR}
       >
         <Text className="text-white text-center font-semibold text-base">
