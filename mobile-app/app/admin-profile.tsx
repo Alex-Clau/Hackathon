@@ -26,7 +26,6 @@ export default function AdminProfileScreen() {
   const {
     pendingOffers,
     activeOffers,
-    loading: pendingLoading,
     fetchPendingOffers,
     activateOffer,
     redeemOffer,
@@ -67,6 +66,7 @@ export default function AdminProfileScreen() {
     } else {
       Alert.alert("Error", "Failed to redeem offer");
     }
+    return success;
   };
 
   return (

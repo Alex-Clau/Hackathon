@@ -16,7 +16,7 @@ import { GradientBackground } from "../components/common/GradientBackground";
 export default function ProfileScreen() {
   const { user, logout, userData } = useAuthContext();
   const { handleLogout, handleBackPress } = useProfileActions(logout);
-  const { userOffers, loading: offersLoading } = useUserOffers();
+  const { userOffers } = useUserOffers();
   const { totalKg, earnedBadges, newBadge, clearNewBadge } = useDonationStats();
   const memberSince = user?.metadata?.creationTime
     ? new Date(user.metadata.creationTime).toLocaleDateString()

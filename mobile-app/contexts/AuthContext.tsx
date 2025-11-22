@@ -32,13 +32,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchUserData = async (uid: string, email?: string) => {
     try {
-      const data = await apiClient.getUserByUid(uid);
+      const data = await apiClient.getUserByUid(uid) as UserData | null;
       setUserData(data);
     } catch (error: any) {
       if (error.message === 'User not found' && email) {
         try {
           await apiClient.createOrUpdateUser(uid, email);
-          const data = await apiClient.getUserByUid(uid);
+          const data = await apiClient.getUserByUid(uid) as UserData | null;
           setUserData(data);
         } catch (createError) {
           console.error('Error creating user data:', createError);

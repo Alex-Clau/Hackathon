@@ -9,6 +9,7 @@ import { OfferCard } from "../../components/offers/OfferCard";
 import { useUserOffers } from "../../hooks/offers/useUserOffers";
 import { useAuthContext } from "../../contexts/AuthContext";
 import { GradientBackground } from "../../components/common/GradientBackground";
+import { isOfferActive } from "../../lib/dateUtils";
 
 interface CompanyOffer {
   id: string;
@@ -57,18 +58,29 @@ export default function CompanyOffersScreen() {
     fetchData();
   }, [companyId]);
 
-    const openMaps = () => {
-      if (!companyName) return;
-      const searchQuery = `${companyName} store`;
-      const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
-      Linking.openURL(url).catch((err) => console.error("Error opening maps:", err));
-    };
-
-    const isOfferActive = (date: any) => {
-      if (!date) return false;
-      const endDate = date.toDate ? date.toDate() : new Date(date);
-      return endDate > new Date();
-    };
+  const openMaps = () => {
+    if (!companyName) return;
+    const searchQuery = `${companyName} store`;
+    // Use platform-specific maps URLs
+    const url = `geo:0,0?q=${encodeURIComponent(searchQuery)}`;
+    const webUrl = `https://maps.google.com/?q=${encodeURIComponent(searchQuery)}`;
+    
+    // Try native maps first, fallback to web
+    Linking.canOpenURL(url)
+      .then((supported) => {
+        if (supported) {
+          return Linking.openURL(url);
+        } else {
+          return Linking.openURL(webUrl);
+        }
+      })
+      .catch(() => {
+        // If both fail, try web URL directly
+        Linking.openURL(webUrl).catch(() => {
+          // Silently fail - don't show error to user
+        });
+      });
+  };
 
   const isOfferActivated = (offerId: string) => {
     return userOffers.some((uo) => uo.offerId === offerId);

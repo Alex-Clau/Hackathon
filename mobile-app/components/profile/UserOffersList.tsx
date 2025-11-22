@@ -1,35 +1,10 @@
 import { View, Text, ScrollView } from "react-native";
 import { UserOffer } from "../../hooks/offers/useUserOffers";
+import { getStatusColor, getStatusText } from "../../lib/statusUtils";
 
 interface UserOffersListProps {
   offers: UserOffer[];
 }
-
-const getStatusColor = (status: string) => {
-  switch (status) {
-    case "pending":
-      return "#F59E0B";
-    case "active":
-      return "#10B981";
-    case "redeemed":
-      return "#6B7280";
-    default:
-      return "#6B7280";
-  }
-};
-
-const getStatusText = (status: string) => {
-  switch (status) {
-    case "pending":
-      return "Pending Activation";
-    case "active":
-      return "Active - Show QR to Redeem";
-    case "redeemed":
-      return "Redeemed";
-    default:
-      return status;
-  }
-};
 
 export const UserOffersList = ({ offers }: UserOffersListProps) => {
   if (offers.length === 0) {

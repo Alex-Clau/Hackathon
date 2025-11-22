@@ -1,13 +1,12 @@
-import { View, Text, Pressable, ActivityIndicator } from "react-native";
+import { View, Text, Pressable, ActivityIndicator, Alert } from "react-native";
 import { useState } from "react";
-import { Alert } from "react-native";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   withTiming,
-  interpolate,
 } from "react-native-reanimated";
+import { formatDate } from "../../lib/dateUtils";
 
 interface OfferCardProps {
   productOfferName: string;
@@ -20,42 +19,6 @@ interface OfferCardProps {
   onActivate?: (offerId: string) => Promise<boolean>;
   isActivated?: boolean;
 }
-
-const formatDate = (date: any) => {
-  if (!date) return "N/A";
-
-  let dateObj: Date | null = null;
-
-  // 1. Handle Firestore Timestamp object (Client SDK)
-  if (date && typeof date.toDate === 'function') {
-    dateObj = date.toDate();
-  }
-  // 2. Handle serialized Firestore Timestamp (Server SDK / JSON)
-  else if (date && date._seconds !== undefined) {
-    dateObj = new Date(date._seconds * 1000 + (date._nanoseconds || 0) / 1000000);
-  }
-  // 3. Handle ISO string or standard Date object
-  else {
-    try {
-      dateObj = new Date(date);
-    } catch (e) {
-      console.error("Invalid date format", e);
-    }
-  }
-
-  // If valid date object, format it strictly as DD.MM.YYYY
-  if (dateObj && !isNaN(dateObj.getTime())) {
-    const day = String(dateObj.getDate()).padStart(2, '0');
-    const month = String(dateObj.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
-    const year = dateObj.getFullYear();
-
-    return `${day}.${month}.${year}`;
-  }
-
-  return "N/A";
-};
-
-export default formatDate;
 
 export const OfferCard = ({
   productOfferName,
@@ -121,7 +84,7 @@ export const OfferCard = ({
         {
           backgroundColor: "#FFFFFF",
           borderLeftWidth: 4,
-          borderLeftColor: isActive ? "#4F6F52" : "#4F6F52",
+          borderLeftColor: "#4F6F52",
           shadowColor: "#1A4D2E",
           shadowOffset: { width: 0, height: 2 },
           shadowRadius: 8,
