@@ -23,6 +23,8 @@ export const useOffers = () => {
       setOffers(data);
     } catch (error) {
       console.error('Error fetching offers:', error);
+      // Set empty array on error so app doesn't stay in loading state
+      setOffers([]);
     } finally {
       setLoading(false);
     }
