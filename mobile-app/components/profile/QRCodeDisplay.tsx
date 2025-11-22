@@ -3,12 +3,11 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Modal,
-  Alert,
 } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import QRCode from "react-native-qrcode-svg";
 import { useState } from "react";
+import { QRInfoModal } from "./QRInfoModal";
 
 interface QRCodeDisplayProps {
   userId?: string;
@@ -16,6 +15,24 @@ interface QRCodeDisplayProps {
 
 export const QRCodeDisplay = ({ userId }: QRCodeDisplayProps) => {
   const [showInfo, setShowInfo] = useState(false);
+
+  const infoItems = [
+    {
+      icon: "checkmark-circle",
+      title: "Show to Redeem Offers",
+      description: "Present this QR code to participating stores to redeem your available offers.",
+    },
+    {
+      icon: "shield-checkmark",
+      title: "Secure & Unique",
+      description: "Your QR code is unique to your account and securely linked to your offers.",
+    },
+    {
+      icon: "scan",
+      title: "Quick Verification",
+      description: "Store staff will scan your code to instantly verify and apply your offers.",
+    },
+  ];
 
   return (
     <View className="bg-white m-4 p-6 rounded-xl shadow-sm">
@@ -62,100 +79,12 @@ export const QRCodeDisplay = ({ userId }: QRCodeDisplayProps) => {
         User ID: {userId?.substring(0, 8)}...
       </Text>
 
-      <Modal
+      <QRInfoModal
         visible={showInfo}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setShowInfo(false)}
-      >
-        <View style={styles.modalOverlay}>
-          <View style={styles.modalContent}>
-            <View className="flex-row items-center justify-between mb-4">
-              <Text className="text-xl font-bold" style={{ color: "#3A5A40" }}>
-                How to Use Your QR Code
-              </Text>
-              <TouchableOpacity onPress={() => setShowInfo(false)}>
-                <Ionicons name="close" size={24} color="#3A5A40" />
-              </TouchableOpacity>
-            </View>
-
-            <View className="space-y-4">
-              <View className="flex-row items-start">
-                <Ionicons
-                  name="checkmark-circle"
-                  size={24}
-                  color="#588157"
-                  style={{ marginRight: 12 }}
-                />
-                <View className="flex-1">
-                  <Text
-                    className="text-base font-semibold mb-1"
-                    style={{ color: "#344E41" }}
-                  >
-                    Show to Redeem Offers
-                  </Text>
-                  <Text className="text-sm" style={{ color: "#588157" }}>
-                    Present this QR code to participating stores to redeem your
-                    available offers.
-                  </Text>
-                </View>
-              </View>
-
-              <View className="flex-row items-start mt-4">
-                <Ionicons
-                  name="shield-checkmark"
-                  size={24}
-                  color="#588157"
-                  style={{ marginRight: 12 }}
-                />
-                <View className="flex-1">
-                  <Text
-                    className="text-base font-semibold mb-1"
-                    style={{ color: "#344E41" }}
-                  >
-                    Secure & Unique
-                  </Text>
-                  <Text className="text-sm" style={{ color: "#588157" }}>
-                    Your QR code is unique to your account and securely linked
-                    to your offers.
-                  </Text>
-                </View>
-              </View>
-
-              <View className="flex-row items-start mt-4">
-                <Ionicons
-                  name="scan"
-                  size={24}
-                  color="#588157"
-                  style={{ marginRight: 12 }}
-                />
-                <View className="flex-1">
-                  <Text
-                    className="text-base font-semibold mb-1"
-                    style={{ color: "#344E41" }}
-                  >
-                    Quick Verification
-                  </Text>
-                  <Text className="text-sm" style={{ color: "#588157" }}>
-                    Store staff will scan your code to instantly verify and
-                    apply your offers.
-                  </Text>
-                </View>
-              </View>
-            </View>
-
-            <TouchableOpacity
-              className="mt-6 py-3 px-4 rounded-lg"
-              style={{ backgroundColor: "#3A5A40" }}
-              onPress={() => setShowInfo(false)}
-            >
-              <Text className="text-white text-center font-semibold">
-                Got it!
-              </Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+        onClose={() => setShowInfo(false)}
+        title="How to Use Your QR Code"
+        items={infoItems}
+      />
     </View>
   );
 };
@@ -167,19 +96,5 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.1,
     shadowRadius: 3.84,
     elevation: 5,
-  },
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: "rgba(0, 0, 0, 0.5)",
-    justifyContent: "center",
-    alignItems: "center",
-    padding: 20,
-  },
-  modalContent: {
-    backgroundColor: "white",
-    borderRadius: 16,
-    padding: 24,
-    width: "100%",
-    maxWidth: 400,
   },
 });
