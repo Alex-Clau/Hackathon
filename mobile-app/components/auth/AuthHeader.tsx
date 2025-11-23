@@ -11,13 +11,13 @@ export const AuthHeader = ({ mode }: AuthHeaderProps) => {
     <View className="mb-8">
       <Text 
         className="text-4xl font-bold text-center mb-3"
-        style={{ color: '#1A4D2E' }}
+        style={{ color: '#344E41' }}
       >
         {mode === 'login' ? 'Welcome Back' : 'Create Account'}
       </Text>
       <Text 
         className="text-center text-base"
-        style={{ color: '#4F6F52' }}
+        style={{ color: '#588157' }}
       >
         {mode === 'login' ? 'Sign in to continue' : 'Sign up to get started'}
       </Text>

@@ -73,7 +73,7 @@ export const estimateBulkQuality = async (base64Image) => {
     throw new Error('Image data required');
   }
 
-  // --- CHANGED PROMPT STARTS HERE ---
+  // --- PROMPT STARTS HERE ---
   const prompt = `
     Act as a strict recycling scanner for CLOTHES and SHOES only.
     
@@ -100,7 +100,6 @@ export const estimateBulkQuality = async (base64Image) => {
       "recommendation": "action advice"
     }
   `;
-  // --- CHANGED PROMPT ENDS HERE ---
 
   const modelsToTry = cachedModelName
     ? [cachedModelName]
@@ -149,7 +148,7 @@ export const estimateBulkQuality = async (base64Image) => {
         tier: parsedResult.tier,
         qualityScore: Math.min(100, Math.max(0, Math.round(parsedResult.qualityScore || 50))),
         confidence: Math.min(100, Math.max(0, Math.round(parsedResult.confidence || 80))),
-        detectedItem: parsedResult.detectedItem || "Unknown Object", // Added this field to return object
+        detectedItem: parsedResult.detectedItem || "Unknown Object",
         conditionSummary: parsedResult.conditionSummary || 'Condition assessed',
         recommendation: parsedResult.recommendation || 'Follow standard procedures'
       };

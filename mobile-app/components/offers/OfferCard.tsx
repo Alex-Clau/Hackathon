@@ -14,7 +14,6 @@ interface OfferCardProps {
   description?: string;
   offerEndDate: any;
   isActive: boolean;
-  // Optional activate button props
   offerId?: string;
   onActivate?: (offerId: string) => Promise<boolean>;
   isActivated?: boolean;

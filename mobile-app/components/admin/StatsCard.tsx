@@ -31,7 +31,6 @@ export const StatsCard = ({
   const opacity = useSharedValue(0);
 
   useEffect(() => {
-    // Update display value immediately
     setDisplayValue(value);
     
     scale.value = withSpring(1, { damping: 15, stiffness: 100 });

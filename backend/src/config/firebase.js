@@ -25,13 +25,7 @@ if (!admin.apps.length) {
 
       if (!projectId || !privateKey || !clientEmail) {
         throw new Error(
-          'Missing Firebase Admin SDK credentials.\n\n' +
-          'Option 1 (Recommended): Place serviceAccountKey.json in the backend folder\n' +
-          '  Get it from: Firebase Console → Project Settings → Service Accounts → Generate New Private Key\n\n' +
-          'Option 2: Set environment variables:\n' +
-          '  - EXPO_PUBLIC_FIREBASE_PROJECT_ID\n' +
-          '  - EXPO_PUBLIC_FIREBASE_PRIVATE_KEY (with \\n for newlines, all on one line)\n' +
-          '  - EXPO_PUBLIC_FIREBASE_CLIENT_EMAIL'
+          'Missing Firebase Admin SDK credentials.'
         );
       }
 
@@ -43,11 +37,8 @@ if (!admin.apps.length) {
 
       if (!privateKey.includes('BEGIN PRIVATE KEY') || !privateKey.includes('END PRIVATE KEY')) {
         throw new Error(
-          'Invalid private key format. The key must include:\n' +
-          '  -----BEGIN PRIVATE KEY-----\n' +
-          '  ...key content...\n' +
-          '  -----END PRIVATE KEY-----'
-        );
+          'Invalid private key format.'
+        );;
       }
 
       admin.initializeApp({
@@ -57,7 +48,7 @@ if (!admin.apps.length) {
           clientEmail,
         }),
       });
-      console.log('Firebase Admin SDK initialized using environment variables');
+      console.log('Firebase Admin SDK initialized using env');
     }
   } catch (error) {
     console.error('Firebase Admin SDK initialization failed:');

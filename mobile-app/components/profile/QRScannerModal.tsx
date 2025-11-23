@@ -1,12 +1,6 @@
 import { Modal, View, TouchableOpacity, Text, StyleSheet } from "react-native";
 import { CameraView } from "expo-camera";
 import { Ionicons } from "@expo/vector-icons";
-import { useEffect } from "react";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withTiming,
-} from "react-native-reanimated";
 
 interface QRScannerModalProps {
   visible: boolean;
@@ -19,29 +13,9 @@ export const QRScannerModal = ({
   onClose,
   onBarcodeScanned,
 }: QRScannerModalProps) => {
-  const translateY = useSharedValue(1000);
-  const opacity = useSharedValue(0);
-
-  useEffect(() => {
-    if (visible) {
-      translateY.value = withTiming(0, { duration: 200 });
-      opacity.value = withTiming(1, { duration: 200 });
-    } else {
-      translateY.value = withTiming(1000, { duration: 150 });
-      opacity.value = withTiming(0, { duration: 150 });
-    }
-  }, [visible]);
-
-  const animatedStyle = useAnimatedStyle(() => {
-    return {
-      transform: [{ translateY: translateY.value }],
-      opacity: opacity.value,
-    };
-  });
-
   return (
-    <Modal visible={visible} transparent animationType="none">
-      <Animated.View style={[styles.scannerContainer, animatedStyle]}>
+    <Modal visible={visible} animationType="slide">
+      <View style={styles.scannerContainer}>
         <CameraView
           style={styles.camera}
           facing="back"
@@ -54,7 +28,7 @@ export const QRScannerModal = ({
             </TouchableOpacity>
           </View>
         </CameraView>
-      </Animated.View>
+      </View>
     </Modal>
   );
 };

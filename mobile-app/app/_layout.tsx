@@ -30,7 +30,6 @@ function RootLayoutNav() {
         }
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, userData, loading, segments]);
 
   return (

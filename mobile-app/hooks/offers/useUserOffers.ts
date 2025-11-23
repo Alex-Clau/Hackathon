@@ -90,23 +90,6 @@ export const useUserOffers = () => {
     }
 
     try {
-      // Check if offer is expired before allowing activation
-      const offerDoc = await getDoc(doc(db, "offers", offerId));
-      if (!offerDoc.exists()) {
-        console.error("Offer not found:", offerId);
-        return false;
-      }
-
-      const offerData = offerDoc.data();
-      const offerEndDate = offerData.offerEndDate?.toDate 
-        ? offerData.offerEndDate.toDate() 
-        : new Date(offerData.offerEndDate);
-      
-      if (offerEndDate <= new Date()) {
-        console.error("Cannot activate expired offer:", offerId);
-        return false;
-      }
-
       await addDoc(collection(db, "usersOffers"), {
         userId: user.uid,
         offerId,

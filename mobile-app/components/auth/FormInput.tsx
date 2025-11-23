@@ -16,18 +16,18 @@ export const FormInput = ({
     <View className="mb-5">
       <Text 
         className="text-sm font-semibold mb-2"
-        style={{ color: '#1A4D2E' }}
+        style={{ color: '#3A5A40' }}
       >
         {label}
       </Text>
       <TextInput
         className="border rounded-xl px-4 py-4 text-base"
         style={{
-          borderColor: error ? '#DC2626' : '#4F6F52',
+          borderColor: error ? '#DC2626' : '#A3B18A',
           backgroundColor: error ? '#FEF2F2' : '#FFFFFF',
-          color: '#1A4D2E',
+          color: '#344E41',
         }}
-        placeholderTextColor="#4F6F52"
+        placeholderTextColor="#A3B18A"
         editable={!loading}
         {...textInputProps}
       />
@@ -36,6 +36,6 @@ export const FormInput = ({
           {error}
         </Text>
       )}
-    </View> 
+    </View>
   );
 };

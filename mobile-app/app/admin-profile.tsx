@@ -26,6 +26,7 @@ export default function AdminProfileScreen() {
   const {
     pendingOffers,
     activeOffers,
+    loading: pendingLoading,
     fetchPendingOffers,
     activateOffer,
     redeemOffer,
@@ -38,19 +39,18 @@ export default function AdminProfileScreen() {
     } else {
       fetchPendingOffers("", user?.email || null);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [scannedUserId, user?.email]);
 
   const handleActivateOffer = async (userOfferId: string) => {
     const success = await activateOffer(userOfferId);
     if (success) {
       Alert.alert("Success", "Offer activated! User can now redeem it.");
-      refreshStats(); // Refresh dashboard stats to update engagements count
+      refreshStats();
       if (scannedUserId) {
         fetchPendingOffers(scannedUserId, user?.email || null);
       }
     } else {
-      Alert.alert("Error", "Failed to activate offer. The offer may have expired or there was an error.");
+      Alert.alert("Error", "Failed to activate offer");
     }
     return success;
   };
@@ -59,14 +59,13 @@ export default function AdminProfileScreen() {
     const success = await redeemOffer(userOfferId);
     if (success) {
       Alert.alert("Success", "Offer redeemed!");
-      refreshStats(); // Refresh dashboard stats to update engagements count
+      refreshStats();
       if (scannedUserId) {
         fetchPendingOffers(scannedUserId, user?.email || null);
       }
     } else {
       Alert.alert("Error", "Failed to redeem offer");
     }
-    return success;
   };
 
   return (

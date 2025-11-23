@@ -16,7 +16,6 @@ export const OffersList = ({ offers }: OffersListProps) => {
       router.push("/auth");
       return;
     }
-    // Navigate to company offers page
     router.push(`/company/${companyId}` as any);
   };
 

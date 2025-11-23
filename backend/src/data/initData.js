@@ -21,7 +21,6 @@ export const companies = [
   },
 ];
 
-// Offers will have companyId added by script (using index to reference company)
 // All offers have dates far in the future to ensure they don't expire
 export const offers = [
   // Nike (3 offers)
@@ -31,7 +30,7 @@ export const offers = [
     discountSize: '30%',
     description: 'Bring 4kgs of Nike clothing items to activate this offer',
     requiredKg: 4,
-    offerEndDate: new Date('2027-12-31'), // Far future
+    offerEndDate: new Date('2027-12-31'),
   },
   {
     companyIndex: 0,
@@ -39,7 +38,7 @@ export const offers = [
     discountSize: '$50 off',
     description: 'Collect 3kgs of Nike sportswear to unlock this discount',
     requiredKg: 3,
-    offerEndDate: new Date('2027-11-30'), // Far future
+    offerEndDate: new Date('2027-11-30'),
   },
   {
     companyIndex: 0,
@@ -47,7 +46,7 @@ export const offers = [
     discountSize: '25%',
     description: 'Donate 5kgs of Nike apparel to redeem this exclusive offer',
     requiredKg: 5,
-    offerEndDate: new Date('2027-10-15'), // Far future
+    offerEndDate: new Date('2027-10-15'),
   },
   // Adidas (3 offers)
   {
@@ -56,7 +55,7 @@ export const offers = [
     discountSize: '25%',
     description: 'Bring 4.5kgs of Adidas clothing to activate this offer',
     requiredKg: 4.5,
-    offerEndDate: new Date('2027-12-15'), // Far future
+    offerEndDate: new Date('2027-12-15'),
   },
   {
     companyIndex: 1,
@@ -64,7 +63,7 @@ export const offers = [
     discountSize: '$40 off',
     description: 'Collect 3.5kgs of Adidas items to unlock this discount',
     requiredKg: 3.5,
-    offerEndDate: new Date('2027-11-05'), // Far future
+    offerEndDate: new Date('2027-11-05'),
   },
   {
     companyIndex: 1,
@@ -72,7 +71,7 @@ export const offers = [
     discountSize: '20%',
     description: 'Donate 6kgs of Adidas apparel to redeem this special offer',
     requiredKg: 6,
-    offerEndDate: new Date('2027-09-20'), // Far future
+    offerEndDate: new Date('2027-09-20'),
   },
   // Zara (3 offers)
   {
@@ -81,7 +80,7 @@ export const offers = [
     discountSize: '40%',
     description: 'Bring 5kgs of Zara clothing to activate this winter offer',
     requiredKg: 5,
-    offerEndDate: new Date('2027-12-20'), // Far future
+    offerEndDate: new Date('2027-12-20'),
   },
   {
     companyIndex: 2,
@@ -89,7 +88,7 @@ export const offers = [
     discountSize: '$60 off',
     description: 'Collect 3kgs of Zara professional wear to unlock this discount',
     requiredKg: 3,
-    offerEndDate: new Date('2027-11-18'), // Far future
+    offerEndDate: new Date('2027-11-18'),
   },
   {
     companyIndex: 2,
@@ -97,7 +96,7 @@ export const offers = [
     discountSize: '35%',
     description: 'Donate 4kgs of Zara summer clothing to redeem this offer',
     requiredKg: 4,
-    offerEndDate: new Date('2027-10-01'), // Far future
+    offerEndDate: new Date('2027-10-01'),
   },
   // H&M (3 offers)
   {
@@ -106,7 +105,7 @@ export const offers = [
     discountSize: '30%',
     description: 'Bring 4kgs of H&M clothing to activate this denim offer',
     requiredKg: 4,
-    offerEndDate: new Date('2027-11-25'), // Far future
+    offerEndDate: new Date('2027-11-25'),
   },
   {
     companyIndex: 3,
@@ -114,7 +113,7 @@ export const offers = [
     discountSize: '$25 off',
     description: 'Collect 2.5kgs of H&M basics to unlock this discount',
     requiredKg: 2.5,
-    offerEndDate: new Date('2027-12-28'), // Far future
+    offerEndDate: new Date('2027-12-28'),
   },
   {
     companyIndex: 3,
@@ -122,7 +121,7 @@ export const offers = [
     discountSize: '40%',
     description: 'Donate 5kgs of H&M kids clothing to redeem this family offer',
     requiredKg: 5,
-    offerEndDate: new Date('2027-08-31'), // Far future
+    offerEndDate: new Date('2027-08-31'),
   },
   // Puma (3 offers)
   {
@@ -131,7 +130,7 @@ export const offers = [
     discountSize: '30%',
     description: 'Bring 4kgs of Puma clothing to activate this sneaker offer',
     requiredKg: 4,
-    offerEndDate: new Date('2027-12-10'), // Far future
+    offerEndDate: new Date('2027-12-10'),
   },
   {
     companyIndex: 4,
@@ -139,7 +138,7 @@ export const offers = [
     discountSize: '$35 off',
     description: 'Collect 3.5kgs of Puma sportswear to unlock this training discount',
     requiredKg: 3.5,
-    offerEndDate: new Date('2027-12-31'), // Far future
+    offerEndDate: new Date('2027-12-31'),
   },
   {
     companyIndex: 4,
@@ -147,7 +146,7 @@ export const offers = [
     discountSize: '25%',
     description: 'Donate 5kgs of Puma apparel to redeem this classic offer',
     requiredKg: 5,
-    offerEndDate: new Date('2027-09-15'), // Far future
+    offerEndDate: new Date('2027-09-15'),
   },
 ];
 
@@ -202,70 +201,68 @@ export const adminUsers = [
   },
 ];
 
-// Users-Offers: uses indices to reference user and offer
 // status: 'pending', 'active', or 'redeemed'
 export const usersOffers = [
-  // John Doe - 4 offers (mix of pending and active)
   {
     userIndex: 0,
-    offerIndex: 0, // Air Max Running Shoes - Nike
-    status: 'active',
-  },
-  {
-    userIndex: 0,
-    offerIndex: 6, // Winter Coat Collection - Zara
-    status: 'pending',
-  },
-  {
-    userIndex: 0,
-    offerIndex: 9, // Denim Jeans Collection - H&M
+    offerIndex: 0,
     status: 'active',
   },
   {
     userIndex: 0,
-    offerIndex: 12, // RS-X Sneakers Collection - Puma
-    status: 'pending',
-  },
-  // Jane Smith - 4 offers (mix of pending and active)
-  {
-    userIndex: 1,
-    offerIndex: 1, // Dri-FIT Sportswear Bundle - Nike
-    status: 'active',
-  },
-  {
-    userIndex: 1,
-    offerIndex: 7, // Business Casual Attire - Zara
-    status: 'active',
-  },
-  {
-    userIndex: 1,
-    offerIndex: 10, // Basic Essentials Bundle - H&M
+    offerIndex: 6,
     status: 'pending',
   },
   {
-    userIndex: 1,
-    offerIndex: 13, // Training Apparel Bundle - Puma
+    userIndex: 0,
+    offerIndex: 9,
     status: 'active',
   },
-  // Bob Johnson - 4 offers (mix of pending and active)
+  {
+    userIndex: 0,
+    offerIndex: 12,
+    status: 'pending',
+  },
+
+  {
+    userIndex: 1,
+    offerIndex: 1,
+    status: 'active',
+  },
+  {
+    userIndex: 1,
+    offerIndex: 7,
+    status: 'active',
+  },
+  {
+    userIndex: 1,
+    offerIndex: 10,
+    status: 'pending',
+  },
+  {
+    userIndex: 1,
+    offerIndex: 13,
+    status: 'active',
+  },
+
   {
     userIndex: 2,
-    offerIndex: 2, // Jordan Retro Sneakers - Nike
+    offerIndex: 2,
     status: 'pending',
   },
   {
     userIndex: 2,
-    offerIndex: 5, // Yeezy Collection - Adidas
+    offerIndex: 5,
     status: 'active',
   },
   {
     userIndex: 2,
-    offerIndex: 8, // Summer Dresses & Tops - Zara
+    offerIndex: 8,
     status: 'active',
   },
   {
     userIndex: 2,
-    offerIndex: 14, // Classic Suede Sneakers - Puma
+    offerIndex: 14, 
     status: 'pending',
   },
 ];

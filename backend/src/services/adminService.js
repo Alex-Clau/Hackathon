@@ -16,22 +16,19 @@ export const getAdminStats = async (companyId) => {
     return endDate <= now;
   });
 
-  // Get all user offers for this company's offers
   const companyOfferIds = new Set(offers.map((o) => o.id));
   
-  // Query usersOffers that match company's offer IDs
-  // Note: Firestore 'in' query has a limit of 10 items
+  // Query usersOffers that match company's offer IDs (limit of 10)
   const companyOfferIdsArray = Array.from(companyOfferIds);
   let usersOffersSnapshot;
   
   if (companyOfferIdsArray.length <= 10 && companyOfferIdsArray.length > 0) {
-    // Use 'in' query for efficiency when we have 10 or fewer offers
     usersOffersSnapshot = await db
       .collection('usersOffers')
       .where('offerId', 'in', companyOfferIdsArray)
       .get();
   } else {
-    // Get all user offers and filter in memory (for companies with >10 offers)
+    // Get all user offers and filter in memory (companies with >10 offers)
     usersOffersSnapshot = await db
       .collection('usersOffers')
       .get();
