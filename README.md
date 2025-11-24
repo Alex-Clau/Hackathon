@@ -1,8 +1,10 @@
-<h1 style="color: #2E7D32;">🌱 Eco Rewards - Sustainable Fashion App</h1>
+# 🌱 Eco Rewards - Sustainable Fashion App
 
-<p style="color: #FFD700; font-weight: bold;">🏆 <strong>Award-Winning Hackathon Project</strong></p>
+🏆 **Award-Winning Hackathon Project**
 
 > A mobile app that uses AI to help you make sustainable fashion choices. Assess clothing quality, donate responsibly, and earn rewards from eco-friendly brands.
+
+---
 
 ## ✨ What It Does
 
@@ -23,6 +25,33 @@ Transform your wardrobe into a force for good! This app helps you:
 - 📋 **Pending Offers** - Review and manage pending offer requests
 - 📊 **Analytics** - Track company performance and user engagement metrics
 - 🔍 **User Insights** - Monitor donation activity and offer redemption rates
+
+---
+
+## 🎥 Demo Videos
+
+> 💡 **Tip:** For the best understanding of the app, play both videos concurrently! Click both links below to open them in separate tabs, then arrange your browser windows side-by-side.
+
+<div align="center">
+  <table>
+    <tr>
+      <td align="center" width="50%">
+        <h3>👤 User Experience</h3>
+        <a href="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoClient.mp4" target="_blank">
+          <strong style="font-size: 1.2em;">▶️ Play User Demo</strong>
+        </a>
+      </td>
+      <td align="center" width="50%">
+        <h3>👨‍💼 Admin Dashboard</h3>
+        <a href="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoAdmin.mp4" target="_blank">
+          <strong style="font-size: 1.2em;">▶️ Play Admin Demo</strong>
+        </a>
+      </td>
+    </tr>
+  </table>
+</div>
+
+**Or use the interactive viewer:** [🎬 Open Both Videos Side-by-Side](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Alex-Clau/Hackathon/main/docs/demo-videos.html)
 
 ---
 
@@ -101,33 +130,6 @@ Seed the database with sample data:
 ```bash
 curl -X POST http://localhost:3000/api/init/all
 ```
-
----
-
-## 🎥 Demo Videos
-
-> 💡 **Tip:** For the best understanding of the app, play both videos concurrently!
-
-<div align="center">
-  <table>
-    <tr>
-      <td align="center" width="50%">
-        <h3>👤 User Experience</h3>
-        <video width="100%" controls style="border-radius: 8px; max-width: 500px;">
-          <source src="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoClient.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </td>
-      <td align="center" width="50%">
-        <h3>👨‍💼 Admin Dashboard</h3>
-        <video width="100%" controls style="border-radius: 8px; max-width: 500px;">
-          <source src="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoAdmin.mp4" type="video/mp4">
-          Your browser does not support the video tag.
-        </video>
-      </td>
-    </tr>
-  </table>
-</div>
 
 ---
 

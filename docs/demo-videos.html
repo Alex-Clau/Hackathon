@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eco Rewards - Demo Videos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #F5EFE6 0%, #E8DFCA 50%, #F5EFE6 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 10px 40px rgba(26, 77, 46, 0.15);
+            max-width: 1200px;
+            width: 100%;
+        }
+        h1 {
+            text-align: center;
+            color: #1A4D2E;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .subtitle {
+            text-align: center;
+            color: #4F6F52;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        .tip {
+            background: #FFF9C4;
+            border-left: 4px solid #FFD700;
+            padding: 15px 20px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+        }
+        .tip strong {
+            color: #1A4D2E;
+        }
+        .videos-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-top: 20px;
+        }
+        .video-wrapper {
+            background: linear-gradient(135deg, #F5EFE6 0%, #E8DFCA 100%);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid #E8DFCA;
+        }
+        .video-wrapper h3 {
+            color: #1A4D2E;
+            margin-bottom: 20px;
+            font-size: 1.4em;
+            font-weight: bold;
+        }
+        video {
+            width: 100%;
+            max-width: 100%;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(26, 77, 46, 0.2);
+            background: #1A4D2E;
+        }
+        @media (max-width: 768px) {
+            .videos-container {
+                grid-template-columns: 1fr;
+            }
+            h1 {
+                font-size: 2em;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🌱 Eco Rewards - Sustainable Fashion App</h1>
+        <p class="subtitle">🏆 Award-Winning Hackathon Project</p>
+        
+        <div class="tip">
+            <strong>💡 Tip:</strong> For the best understanding of the app, play both videos concurrently!
+        </div>
+        
+        <div class="videos-container">
+            <div class="video-wrapper">
+                <h3>👤 User Experience</h3>
+                <video controls>
+                    <source src="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoClient.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+            
+            <div class="video-wrapper">
+                <h3>👨‍💼 Admin Dashboard</h3>
+                <video controls>
+                    <source src="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoAdmin.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
