@@ -6,7 +6,10 @@ const getFullImageUrl = (logoPath) => {
   if (logoPath.startsWith('http://') || logoPath.startsWith('https://')) {
     return logoPath;
   }
-  const host = process.env.API_HOST || '192.168.34.48';
+  const host = process.env.API_HOST;
+  if (!host) {
+    throw new Error('API_HOST is required in .env file');
+  }
   const port = process.env.PORT || 3000;
   const protocol = process.env.NODE_ENV === 'production' ? 'https' : 'http';
   return `${protocol}://${host}:${port}${logoPath.startsWith('/') ? logoPath : '/' + logoPath}`;
@@ -42,10 +45,11 @@ export const getOffersGroupedByCompany = async () => {
 
   offers.forEach((offer) => {
     if (!companyMap.has(offer.companyId)) {
+      // offer.companyLogo is already a full URL from getAllOffers()
       companyMap.set(offer.companyId, {
         id: offer.companyId,
         companyName: offer.companyName,
-        imageUrl: getFullImageUrl(offer.companyLogo),
+        imageUrl: offer.companyLogo,
         title: offer.companyName,
         offersCount: 0,
         offers: [],

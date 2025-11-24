@@ -1,22 +1,17 @@
 # 📱 Mobile App
 
-> React Native app built with Expo for sustainable fashion and clothing donation management.
+> ⚠️ **Prerequisite:** Set up the [backend API](../backend/README.md) first.
 
-> ⚠️ **Prerequisite:** Make sure the [backend API](../backend/README.md) is set up and running before starting the mobile app.
-
----
-
-## 🚀 Quick Setup
+## Setup
 
 ### 1. Install Dependencies
-
 ```bash
 npm install
 ```
 
 ### 2. Configure Environment
 
-Create a `.env` file in the `mobile-app/` directory:
+Create `.env` in `mobile-app/`:
 
 ```env
 EXPO_PUBLIC_FIREBASE_API_KEY=your-api-key
@@ -25,70 +20,34 @@ EXPO_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
 EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
 EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
 EXPO_PUBLIC_FIREBASE_APP_ID=your-app-id
+EXPO_PUBLIC_API_URL=http://YOUR_IP:3000/api
 ```
 
-<details>
-<summary>💡 <strong>How to get Firebase Config</strong></summary>
+**Get Firebase config:** [Firebase Console](https://console.firebase.google.com/) → Project Settings → Your apps → Web app (`</>`)
 
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Select your project (or create a new one)
-3. Project Settings → General
-4. Scroll to "Your apps" section
-5. Click the web icon (`</>`)
-6. Copy the config values to your `.env` file
+**EXPO_PUBLIC_API_URL:**
+- iOS Simulator/Physical Device: Use your machine's IP (e.g., `http://192.168.1.100:3000/api`)
+- Android Emulator: `http://10.0.2.2:3000/api`
+- Web: `http://localhost:3000/api`
 
-**Note:** Use the same Firebase project as your backend for consistency.
+**Find your IP:**
+- macOS/Linux: `ifconfig | grep "inet " | grep -v 127.0.0.1 | awk '{print $2}' | head -1`
+- Windows: `ipconfig` → look for IPv4 Address
 
-</details>
-
-### 3. Start Development Server
-
+### 3. Start
 ```bash
 npm start
 ```
 
-### 4. Run on Device
+Press `i` for iOS, `a` for Android, or scan QR code for physical device.
 
-After starting, choose your platform:
+## Troubleshooting
 
-- **iOS Simulator**: Press `i` (requires Xcode on macOS)
-- **Android Emulator**: Press `a` (requires Android Studio)
-- **Physical Device**: 
-  - Install [Expo Go](https://expo.dev/go) app
-  - Scan the QR code from terminal
-  - Make sure device and computer are on same Wi-Fi
+**Can't connect to backend:**
+- Backend server must be running
+- Use IP address (not `localhost`) in `EXPO_PUBLIC_API_URL`
+- Update IP if you change networks
 
----
-
-## ✨ Features
-
-- 🔐 Email/password authentication
-- 📸 AI-powered quality checks
-- 🎁 Browse company offers
-- 📱 QR code generation & scanning
-- 🏆 Badge system & impact tracking
-- 👨‍💼 Admin dashboard
-
----
-
-## 🔧 Troubleshooting
-
-### App shows "No offers available"
-
-- Make sure the backend server is running at `http://localhost:3000`
-- Check that you've initialized the database (see [Backend README](../backend/README.md))
-- Verify your Firebase project ID matches in both backend and mobile app `.env` files
-
-### Authentication not working
-
-- Ensure Firebase Auth is enabled in your Firebase Console
-- Verify all Firebase config values are correct in your `.env` file
-- Check that you're using the same Firebase project for both backend and mobile app
-
-### Can't connect to backend
-
-- Verify the backend server is running
-- Check your network connection
-- Make sure both devices are on the same network (for physical devices)
-
----
+**Images not loading:**
+- Set `API_HOST` in backend `.env` to match your IP (same as `EXPO_PUBLIC_API_URL`)
+- Restart backend after updating `API_HOST`

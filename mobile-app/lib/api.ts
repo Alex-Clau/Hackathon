@@ -1,4 +1,7 @@
-const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL || 'http://192.168.34.48:3000/api';
+const API_BASE_URL = process.env.EXPO_PUBLIC_API_URL;
+if (!API_BASE_URL) {
+  throw new Error('EXPO_PUBLIC_API_URL is required in .env file');
+}
 
 export interface CompanyOffer {
   id: string;
