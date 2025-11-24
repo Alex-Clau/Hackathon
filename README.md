@@ -45,7 +45,7 @@
   <strong style="color: #2E7D32;">💡 Tip:</strong> <span style="color: #4F6F52;">For the best understanding of the app, play both videos concurrently! Click both links below to open them in separate tabs, then arrange your browser windows side-by-side.</span>
 </div>
 
-<table align="center" style="margin: 20px auto;">
+<table style="margin: 20px auto;">
   <tr>
     <td align="center" style="padding: 20px; vertical-align: top;">
       <h3 style="color: #2E7D32; margin: 0 0 15px 0;">👤 User Experience</h3>
@@ -170,6 +170,12 @@ curl -X POST http://localhost:3000/api/init/all
   <li><span style="color: #FF9800;">Firebase Auth</span></li>
   <li><span style="color: #06B6D4;">NativeWind</span> (Tailwind for RN)</li>
 </ul>
+
+---
+
+## 📄 License
+
+This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
 
 ---
 

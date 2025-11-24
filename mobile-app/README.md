@@ -8,9 +8,9 @@
 
 ### 1. Install Dependencies
 
-```bash
-npm install
-```
+   ```bash
+   npm install
+   ```
 
 ### 2. Configure Environment
 
