@@ -6,6 +6,13 @@
 
 ---
 
+## 📋 Prerequisites
+
+- **Node.js** (v18 or higher) - [Download](https://nodejs.org/)
+- **npm** (comes with Node.js)
+
+---
+
 ## ✨ What It Does
 
 Transform your wardrobe into a force for good! This app helps you:
