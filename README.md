@@ -1,84 +1,86 @@
-<h1 style="color: #2E7D32;">🌱 Eco Rewards - Sustainable Fashion App</h1>
+# 🌱 Eco Rewards - Sustainable Fashion App
 
-<p style="color: #FFD700; font-weight: bold;">🏆 <strong>Award-Winning Hackathon Project</strong></p>
+[![Award Winner](https://img.shields.io/badge/🏆-Award--Winning%20Hackathon%20Project-FFD700?style=for-the-badge&logo=trophy)](https://github.com/Alex-Clau/Hackathon)
 
 > A mobile app that uses AI to help you make sustainable fashion choices. Assess clothing quality, donate responsibly, and earn rewards from eco-friendly brands.
 
 ---
 
-<h2 style="color: #2E7D32;">📋 Prerequisites</h2>
+## 🛠️ Built With
 
-- **Node.js** (v18 or higher) - [Download](https://nodejs.org/) <span style="color: #4F6F52;">✓</span>
-- **npm** (comes with Node.js) <span style="color: #4F6F52;">✓</span>
+### Backend
 
----
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
 
-<h2 style="color: #2E7D32;">✨ What It Does</h2>
+### Mobile
 
-<p style="color: #4F6F52; font-size: 1.1em;">Transform your wardrobe into a force for good! This app helps you:</p>
-
-<h3 style="color: #2E7D32;">For Users 👤</h3>
-<ul style="color: #4F6F52;">
-  <li>🤖 <strong style="color: #2E7D32;">AI Quality Check</strong> - Snap a photo, get instant recommendations (DONATE/RECYCLE/REJECT)</li>
-  <li>🎁 <strong style="color: #2E7D32;">Exclusive Offers</strong> - Unlock discounts from sustainable fashion brands</li>
-  <li>🏆 <strong style="color: #2E7D32;">Earn Badges</strong> - Track your environmental impact and earn rewards (1kg, 50kg, 100kg, 200kg milestones)</li>
-  <li>📱 <strong style="color: #2E7D32;">QR Codes</strong> - Generate and scan QR codes for easy offer redemption</li>
-  <li>📊 <strong style="color: #2E7D32;">Impact Dashboard</strong> - See your CO₂ saved, water saved, and landfill space saved</li>
-  <li>👤 <strong style="color: #2E7D32;">User Profile</strong> - View donation history, earned badges, and account information</li>
-  <li>📸 <strong style="color: #2E7D32;">Photo Analysis</strong> - AI-powered clothing condition assessment with detailed recommendations</li>
-</ul>
-
-<h3 style="color: #FF9800;">For Administrators 👨‍💼</h3>
-<ul style="color: #4F6F52;">
-  <li>📈 <strong style="color: #FF9800;">Statistics Dashboard</strong> - View total offers, active/expired offers, and user engagements</li>
-  <li>✅ <strong style="color: #FF9800;">Offer Management</strong> - Activate and redeem user offers with one click</li>
-  <li>📋 <strong style="color: #FF9800;">Pending Offers</strong> - Review and manage pending offer requests</li>
-  <li>📊 <strong style="color: #FF9800;">Analytics</strong> - Track company performance and user engagement metrics</li>
-  <li>🔍 <strong style="color: #FF9800;">User Insights</strong> - Monitor donation activity and offer redemption rates</li>
-</ul>
+[![React Native](https://img.shields.io/badge/React%20Native-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![Firebase Auth](https://img.shields.io/badge/Firebase%20Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/docs/auth)
+[![NativeWind](https://img.shields.io/badge/NativeWind-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://www.nativewind.dev/)
 
 ---
 
-<h2 style="color: #2E7D32;">🎥 Demo Videos</h2>
+## 📋 Prerequisites
 
-<div style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 15px; border-radius: 8px; margin: 20px 0;">
-  <strong style="color: #2E7D32;">💡 Tip:</strong> <span style="color: #4F6F52;">For the best understanding of the app, play both videos concurrently! Click both links below to open them in separate tabs, then arrange your browser windows side-by-side.</span>
+- **Node.js** (v18 or higher) - [Download](https://nodejs.org/) ![Node.js Status](https://img.shields.io/badge/✓-Ready-4CAF50?style=flat-square)
+- **npm** (comes with Node.js) ![npm Status](https://img.shields.io/badge/✓-Ready-4CAF50?style=flat-square)
+
+---
+
+## ✨ What It Does
+
+Transform your wardrobe into a force for good! This app helps you:
+
+### 👤 For Users
+
+- 🤖 **AI Quality Check** - Snap a photo, get instant recommendations (DONATE/RECYCLE/REJECT)
+- 🎁 **Exclusive Offers** - Unlock discounts from sustainable fashion brands
+- 🏆 **Earn Badges** - Track your environmental impact and earn rewards (1kg, 50kg, 100kg, 200kg milestones)
+- 📱 **QR Codes** - Generate and scan QR codes for easy offer redemption
+- 📊 **Impact Dashboard** - See your CO₂ saved, water saved, and landfill space saved
+- 👤 **User Profile** - View donation history, earned badges, and account information
+- 📸 **Photo Analysis** - AI-powered clothing condition assessment with detailed recommendations
+
+### 👨‍💼 For Administrators
+
+- 📈 **Statistics Dashboard** - View total offers, active/expired offers, and user engagements
+- ✅ **Offer Management** - Activate and redeem user offers with one click
+- 📋 **Pending Offers** - Review and manage pending offer requests
+- 📊 **Analytics** - Track company performance and user engagement metrics
+- 🔍 **User Insights** - Monitor donation activity and offer redemption rates
+
+---
+
+## 🎥 Demo Videos
+
+> 💡 **Tip:** For the best understanding of the app, play both videos concurrently! Click both links below to open them in separate tabs, then arrange your browser windows side-by-side.
+
+| 👤 User Experience | 👨‍💼 Admin Dashboard |
+|:---:|:---:|
+| [![Play User Demo](https://img.shields.io/badge/▶️-Play%20User%20Demo-4CAF50?style=for-the-badge)](https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoClient.mp4) | [![Play Admin Demo](https://img.shields.io/badge/▶️-Play%20Admin%20Demo-FF9800?style=for-the-badge)](https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoAdmin.mp4) |
+
+<div>
+
+[![Open Both Videos Side-by-Side](https://img.shields.io/badge/🎬-Open%20Both%20Videos%20Side--by--Side-4CAF50?style=for-the-badge)](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Alex-Clau/Hackathon/main/docs/demo-videos.html)
+
 </div>
 
-<table style="margin: 20px auto;">
-  <tr>
-    <td align="center" style="padding: 20px; vertical-align: top;">
-      <h3 style="color: #2E7D32; margin: 0 0 15px 0;">👤 User Experience</h3>
-      <a href="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoClient.mp4" target="_blank">
-        <strong style="font-size: 1.2em; color: #4CAF50;">▶️ Play User Demo</strong>
-      </a>
-    </td>
-    <td align="center" style="padding: 20px; vertical-align: top;">
-      <h3 style="color: #FF9800; margin: 0 0 15px 0;">👨‍💼 Admin Dashboard</h3>
-      <a href="https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoAdmin.mp4" target="_blank">
-        <strong style="font-size: 1.2em; color: #FF6B35;">▶️ Play Admin Demo</strong>
-      </a>
-    </td>
-  </tr>
-</table>
-
-<p style="text-align: center; margin-top: 20px;">
-  <strong style="color: #4F6F52;">Or use the interactive viewer:</strong> 
-  <a href="https://htmlpreview.github.io/?https://raw.githubusercontent.com/Alex-Clau/Hackathon/main/docs/demo-videos.html" style="color: #4CAF50; font-weight: bold;">🎬 Open Both Videos Side-by-Side</a>
-</p>
-
 ---
 
-<h2 style="color: #2E7D32;">🚀 Quick Start</h2>
+## 🚀 Quick Start
 
-<h3 style="color: #2E7D32;">Step 1: Backend Setup</h3>
+### Step 1: Backend Setup
 
 ```bash
 cd backend
 npm install
 ```
 
-<p style="color: #4F6F52; font-weight: bold;">Create <code style="background: #E8F5E9; padding: 2px 6px; border-radius: 4px; color: #2E7D32;">backend/.env</code> file:</p>
+**Create `backend/.env` file:**
 
 ```env
 PORT=3000
@@ -89,32 +91,32 @@ EXPO_PUBLIC_FIREBASE_CLIENT_EMAIL=your-service-account@project.iam.gserviceaccou
 GEMINI_API_KEY=your-gemini-key
 ```
 
-<div style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 15px; border-radius: 8px; margin: 15px 0;">
-  <strong style="color: #2E7D32;">💡 Need credentials?</strong>
-  <ul style="color: #4F6F52; margin-top: 10px;">
-    <li><strong>Firebase</strong>: Go to <a href="https://console.firebase.google.com/" style="color: #4CAF50;">Firebase Console</a> → Project Settings → Service Accounts → Generate new private key</li>
-    <li><strong>Gemini AI</strong>: Get your key at <a href="https://makersuite.google.com/app/apikey" style="color: #4CAF50;">Google AI Studio</a></li>
-  </ul>
-</div>
+<details>
+<summary>💡 <strong>Need credentials?</strong></summary>
 
-<p style="color: #4F6F52; font-weight: bold;">Start the server:</p>
+- **Firebase**: Go to [Firebase Console](https://console.firebase.google.com/) → Project Settings → Service Accounts → Generate new private key
+- **Gemini AI**: Get your key at [Google AI Studio](https://makersuite.google.com/app/apikey)
+
+</details>
+
+**Start the server:**
 
 ```bash
 npm start
 ```
 
-<p style="color: #4CAF50; font-weight: bold;">✅ Server running at <code style="background: #E8F5E9; padding: 4px 8px; border-radius: 4px; color: #2E7D32;">http://localhost:3000</code></p>
+![Server Status](https://img.shields.io/badge/✅-Server%20running%20at%20http://localhost:3000-4CAF50?style=flat-square)
 
 ---
 
-<h3 style="color: #2E7D32;">Step 2: Mobile App Setup</h3>
+### Step 2: Mobile App Setup
 
 ```bash
 cd mobile-app
 npm install
 ```
 
-<p style="color: #4F6F52; font-weight: bold;">Create <code style="background: #E8F5E9; padding: 2px 6px; border-radius: 4px; color: #2E7D32;">mobile-app/.env</code> file:</p>
+**Create `mobile-app/.env` file:**
 
 ```env
 EXPO_PUBLIC_API_URL=http://192.168.34.48:3000/api
@@ -126,50 +128,33 @@ EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
 EXPO_PUBLIC_FIREBASE_APP_ID=your-app-id
 ```
 
-<div style="background: #E8F5E9; border-left: 4px solid #4CAF50; padding: 15px; border-radius: 8px; margin: 15px 0;">
-  <strong style="color: #2E7D32;">💡 Firebase Config:</strong> <span style="color: #4F6F52;">Firebase Console → Project Settings → General → Your apps → Web app (click <code style="background: #FFF; padding: 2px 6px; border-radius: 3px;">&lt;/&gt;</code> icon)</span>
-</div>
+<details>
+<summary>💡 <strong>Firebase Config</strong></summary>
 
-<p style="color: #4F6F52; font-weight: bold;">Start the app:</p>
+Firebase Console → Project Settings → General → Your apps → Web app (click `</>` icon)
+
+</details>
+
+**Start the app:**
 
 ```bash
 npm start
 ```
 
-<p style="color: #4F6F52; font-weight: bold;">Then:</p>
-<ul style="color: #4F6F52;">
-  <li>Press <code style="background: #E8F5E9; padding: 2px 6px; border-radius: 4px; color: #2E7D32;">i</code> for iOS Simulator</li>
-  <li>Press <code style="background: #E8F5E9; padding: 2px 6px; border-radius: 4px; color: #2E7D32;">a</code> for Android Emulator</li>
-  <li>Scan QR code with <a href="https://expo.dev/go" style="color: #4CAF50; font-weight: bold;">Expo Go</a> on your phone</li>
-</ul>
+**Then:**
+- Press `i` for iOS Simulator
+- Press `a` for Android Emulator
+- Scan QR code with [Expo Go](https://expo.dev/go) on your phone
 
 ---
 
-<h3 style="color: #2E7D32;">Step 3: Initialize Database (Optional)</h3>
+### Step 3: Initialize Database (Optional)
 
-<p style="color: #4F6F52;">Seed the database with sample data:</p>
+Seed the database with sample data:
 
 ```bash
 curl -X POST http://localhost:3000/api/init/all
 ```
-
----
-
-<h2 style="color: #2E7D32;">🛠️ Built With</h2>
-
-<p><strong style="color: #2E7D32; font-size: 1.1em;">Backend</strong></p>
-<ul style="color: #4F6F52;">
-  <li><span style="color: #2E7D32;">Node.js</span> + <span style="color: #2E7D32;">Express</span></li>
-  <li><span style="color: #FF9800;">Firebase</span> (Firestore)</li>
-  <li><span style="color: #4285F4;">Google Gemini AI</span></li>
-</ul>
-
-<p><strong style="color: #2E7D32; font-size: 1.1em;">Mobile</strong></p>
-<ul style="color: #4F6F52;">
-  <li><span style="color: #61DAFB;">React Native</span> + <span style="color: #2E7D32;">Expo</span></li>
-  <li><span style="color: #FF9800;">Firebase Auth</span></li>
-  <li><span style="color: #06B6D4;">NativeWind</span> (Tailwind for RN)</li>
-</ul>
 
 ---
 
@@ -179,6 +164,8 @@ This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENS
 
 ---
 
-<p style="text-align: center; color: #4F6F52; font-size: 1.1em; margin-top: 30px;">
-  <strong style="color: #2E7D32;">Made with <span style="color: #E91E63;">❤️</span> for a sustainable future</strong>
-</p>
+<div align="center">
+
+**Made with ❤️ for a sustainable future**
+
+</div>
