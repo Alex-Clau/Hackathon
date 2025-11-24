@@ -1,4 +1,4 @@
-/**
+/*
  * Utility functions for offer status handling
  */
 
@@ -17,6 +17,7 @@ export const getStatusColor = (status: OfferStatus | string): string => {
   }
 };
 
+
 export const getStatusText = (status: OfferStatus | string): string => {
   switch (status) {
     case "pending":
@@ -29,4 +30,3 @@ export const getStatusText = (status: OfferStatus | string): string => {
       return status;
   }
 };
-

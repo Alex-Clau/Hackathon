@@ -61,7 +61,9 @@ export default function CompanyOffersScreen() {
       if (!companyName) return;
       const searchQuery = `${companyName} store`;
       const url = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(searchQuery)}`;
-      Linking.openURL(url).catch((err) => console.error("Error opening maps:", err));
+      Linking.openURL(url).catch(() => {
+        // Silently handle error - app still opens
+      });
     };
 
     const isOfferActive = (date: any) => {

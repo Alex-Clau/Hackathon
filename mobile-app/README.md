@@ -1,50 +1,65 @@
-# Welcome to your Expo app 👋
+# 📱 Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+> React Native app built with Expo for sustainable fashion and clothing donation management.
 
-## Get started
+---
 
-1. Install dependencies
+## 🚀 Quick Setup
 
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+### 1. Install Dependencies
 
 ```bash
-npm run reset-project
+npm install
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+### 2. Configure Environment
 
-## Learn more
+Create a `.env` file in the `mobile-app/` directory:
 
-To learn more about developing your project with Expo, look at the following resources:
+```env
+EXPO_PUBLIC_API_URL=http://192.168.34.48:3000/api
+EXPO_PUBLIC_FIREBASE_API_KEY=your-api-key
+EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
+EXPO_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
+EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
+EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
+EXPO_PUBLIC_FIREBASE_APP_ID=your-app-id
+```
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+> 💡 **Firebase Config**: 
+> 1. Go to [Firebase Console](https://console.firebase.google.com/)
+> 2. Project Settings → General
+> 3. Scroll to "Your apps" → Click web icon (`</>`)
+> 4. Copy config values to `.env`
 
-## Join the community
+### 3. Start Development Server
 
-Join our community of developers creating universal apps.
+```bash
+npm start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+### 4. Run on Device
+
+After starting, choose your platform:
+
+- **iOS Simulator**: Press `i` (requires Xcode on macOS)
+- **Android Emulator**: Press `a` (requires Android Studio)
+- **Physical Device**: 
+  - Install [Expo Go](https://expo.dev/go) app
+  - Scan the QR code from terminal
+  - Make sure device and computer are on same Wi-Fi
+
+---
+
+## ✨ Features
+
+- 🔐 Email/password authentication
+- 📸 AI-powered quality checks
+- 🎁 Browse company offers
+- 📱 QR code generation & scanning
+- 🏆 Badge system & impact tracking
+- 👨‍💼 Admin dashboard
+
+---
+
+**Ready to build something awesome! 🎉**
