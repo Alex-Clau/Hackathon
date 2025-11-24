@@ -2,32 +2,37 @@
 
 [![Award Winner](https://img.shields.io/badge/🏆-Award--Winning%20Hackathon%20Project-FFD700?style=for-the-badge&logo=trophy)](https://github.com/Alex-Clau/Hackathon)
 
-> A mobile app that uses AI to help you make sustainable fashion choices. Assess clothing quality, donate responsibly, and earn rewards from eco-friendly brands.
+> A mobile app that uses AI to help you make sustainable fashion choices. Assess clothing quality, donate responsibly,
+> and earn discounts from eco-friendly brands.
 
 ---
 
-## 🛠️ Built With
+## 👥 Team
 
-### Backend
-
-[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
-[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
-[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
-
-### Mobile
-
-[![React Native](https://img.shields.io/badge/React%20Native-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactnative.dev/)
-[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
-[![Firebase Auth](https://img.shields.io/badge/Firebase%20Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/docs/auth)
-[![NativeWind](https://img.shields.io/badge/NativeWind-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://www.nativewind.dev/)
+<p align="center">
+  <a href="https://github.com/Alex-Clau"><img src="https://github.com/Alex-Clau.png?size=50" width="50" height="50" style="border-radius: 50%;" alt="Alex-Clau"/></a>
+  <a href="https://github.com/FazacasMihai"><img src="https://github.com/FazacasMihai.png?size=50" width="50" height="50" style="border-radius: 50%;" alt="FazacasMihai"/></a>
+  <a href="https://github.com/FloreaAndreiCiprian"><img src="https://github.com/FloreaAndreiCiprian.png?size=50" width="50" height="50" style="border-radius: 50%;" alt="FloreaAndreiCiprian"/></a>
+  <a href="https://github.com/ghimpumihai"><img src="https://github.com/ghimpumihai.png?size=50" width="50" height="50" style="border-radius: 50%;" alt="ghimpumihai"/></a>
+  <a href="https://github.com/notbriana"><img src="https://github.com/notbriana.png?size=50" width="50" height="50" style="border-radius: 50%;" alt="notbriana"/></a>
+  <a href="https://github.com/PaulFulop"><img src="https://github.com/PaulFulop.png?size=50" width="50" height="50" style="border-radius: 50%;" alt="PaulFulop"/></a>
+</p>
 
 ---
 
-## 📋 Prerequisites
+## 🎥 Demo Videos
 
-- **Node.js** (v18 or higher) - [Download](https://nodejs.org/) ![Node.js Status](https://img.shields.io/badge/✓-Ready-4CAF50?style=flat-square)
-- **npm** (comes with Node.js) ![npm Status](https://img.shields.io/badge/✓-Ready-4CAF50?style=flat-square)
+> 💡 **Tip:** For the best understanding of the app, play both videos concurrently! 
+
+|                                                                                👤 User Experience                                                                                |                                                                               👨‍💼 Admin Dashboard                                                                               |
+|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| [![Play User Demo](https://img.shields.io/badge/▶️-Play%20User%20Demo-4CAF50?style=for-the-badge)](https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoClient.mp4) | [![Play Admin Demo](https://img.shields.io/badge/▶️-Play%20Admin%20Demo-FF9800?style=for-the-badge)](https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoAdmin.mp4) |
+
+<div>
+
+[![Open Both Videos Side-by-Side](https://img.shields.io/badge/🎬-Open%20Both%20Videos%20Side--by--Side-4CAF50?style=for-the-badge)](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Alex-Clau/Hackathon/main/docs/demo-videos.html)
+
+</div>
 
 ---
 
@@ -51,112 +56,84 @@ Transform your wardrobe into a force for good! This app helps you:
 - ✅ **Offer Management** - Activate and redeem user offers with one click
 - 📋 **Pending Offers** - Review and manage pending offer requests
 - 📊 **Analytics** - Track company performance and user engagement metrics
+- 📱 **QR Codes** - Approve and Redeem offers by scanning QR codes
 - 🔍 **User Insights** - Monitor donation activity and offer redemption rates
-
----
-
-## 🎥 Demo Videos
-
-> 💡 **Tip:** For the best understanding of the app, play both videos concurrently! Click both links below to open them in separate tabs, then arrange your browser windows side-by-side.
-
-| 👤 User Experience | 👨‍💼 Admin Dashboard |
-|:---:|:---:|
-| [![Play User Demo](https://img.shields.io/badge/▶️-Play%20User%20Demo-4CAF50?style=for-the-badge)](https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoClient.mp4) | [![Play Admin Demo](https://img.shields.io/badge/▶️-Play%20Admin%20Demo-FF9800?style=for-the-badge)](https://github.com/Alex-Clau/Hackathon/releases/download/Demo/DemoAdmin.mp4) |
-
-<div>
-
-[![Open Both Videos Side-by-Side](https://img.shields.io/badge/🎬-Open%20Both%20Videos%20Side--by--Side-4CAF50?style=for-the-badge)](https://htmlpreview.github.io/?https://raw.githubusercontent.com/Alex-Clau/Hackathon/main/docs/demo-videos.html)
-
-</div>
 
 ---
 
 ## 🚀 Quick Start
 
-### Step 1: Backend Setup
+### Prerequisites
 
-```bash
-cd backend
-npm install
-```
+- **Node.js** (v18 or higher) - [Download](https://nodejs.org/) ![Node.js Status](https://img.shields.io/badge/✓-Ready-4CAF50?style=flat-square)
+- **npm** (comes with Node.js) ![npm Status](https://img.shields.io/badge/✓-Ready-4CAF50?style=flat-square)
 
-**Create `backend/.env` file:**
+### What You'll Need
 
-```env
-PORT=3000
-API_HOST=192.168.34.48  # Your local IP address
-EXPO_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
-EXPO_PUBLIC_FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
-EXPO_PUBLIC_FIREBASE_CLIENT_EMAIL=your-service-account@project.iam.gserviceaccount.com
-GEMINI_API_KEY=your-gemini-key
-```
+Before starting, make sure you have:
 
-<details>
-<summary>💡 <strong>Need credentials?</strong></summary>
+- 🔥 **Firebase Project** - Create one at [Firebase Console](https://console.firebase.google.com/)
+- 🤖 **Google Gemini API Key** - Get one at [Google AI Studio](https://makersuite.google.com/app/apikey)
 
-- **Firebase**: Go to [Firebase Console](https://console.firebase.google.com/) → Project Settings → Service Accounts → Generate new private key
-- **Gemini AI**: Get your key at [Google AI Studio](https://makersuite.google.com/app/apikey)
+### Setup Process
 
-</details>
+This project consists of two parts that need to be set up:
 
-**Start the server:**
+1. **Backend API** - Must be running first (provides API endpoints for the mobile app)
+2. **Mobile App** - Connects to the backend API
 
-```bash
-npm start
-```
+> ⚠️ **Important:** Set up the backend first, as the mobile app depends on it.
 
-![Server Status](https://img.shields.io/badge/✅-Server%20running%20at%20http://localhost:3000-4CAF50?style=flat-square)
+### Detailed Setup Guides
 
----
+Follow these guides in order:
 
-### Step 2: Mobile App Setup
+#### Step 1: Backend Setup
 
-```bash
-cd mobile-app
-npm install
-```
+👉 **[View Backend Setup Guide](backend/README.md)**
 
-**Create `mobile-app/.env` file:**
+The backend requires:
+- Firebase configuration (API Key, Auth Domain, Project ID, Storage Bucket, Messaging Sender ID, App ID)
+- Firebase Admin SDK credentials (Client Email, Private Key)
+- Google Gemini API Key
 
-```env
-EXPO_PUBLIC_API_URL=http://192.168.34.48:3000/api
-EXPO_PUBLIC_FIREBASE_API_KEY=your-api-key
-EXPO_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
-EXPO_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
-EXPO_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
-EXPO_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your-sender-id
-EXPO_PUBLIC_FIREBASE_APP_ID=your-app-id
-```
+#### Step 2: Mobile App Setup
 
-<details>
-<summary>💡 <strong>Firebase Config</strong></summary>
+👉 **[View Mobile App Setup Guide](mobile-app/README.md)**
 
-Firebase Console → Project Settings → General → Your apps → Web app (click `</>` icon)
+The mobile app requires:
+- Firebase configuration (same Firebase project as backend)
+- Backend API must be running
 
-</details>
+### Quick Verification
 
-**Start the app:**
+After setup, verify everything works:
 
-```bash
-npm start
-```
-
-**Then:**
-- Press `i` for iOS Simulator
-- Press `a` for Android Emulator
-- Scan QR code with [Expo Go](https://expo.dev/go) on your phone
+1. ✅ Backend server running at `http://localhost:3000`
+2. ✅ Mobile app connects to backend
+3. ✅ Firebase authentication works
+4. ✅ AI quality check endpoint responds
 
 ---
 
-### Step 3: Initialize Database (Optional)
+## 🛠️ Built With
 
-Seed the database with sample data:
+### Backend
 
-```bash
-curl -X POST http://localhost:3000/api/init/all
-```
+[![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/)
+[![Express](https://img.shields.io/badge/Express-000000?style=for-the-badge&logo=express&logoColor=white)](https://expressjs.com/)
+[![Firebase](https://img.shields.io/badge/Firebase-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
+[![Google Gemini](https://img.shields.io/badge/Google%20Gemini-4285F4?style=for-the-badge&logo=google&logoColor=white)](https://ai.google.dev/)
+
+### Mobile
+
+[![React Native](https://img.shields.io/badge/React%20Native-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://reactnative.dev/)
+[![Expo](https://img.shields.io/badge/Expo-000020?style=for-the-badge&logo=expo&logoColor=white)](https://expo.dev/)
+[![Firebase Auth](https://img.shields.io/badge/Firebase%20Auth-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/docs/auth)
+[![NativeWind](https://img.shields.io/badge/NativeWind-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://www.nativewind.dev/)
 
 ---
+
 
 ## 📄 License
 
